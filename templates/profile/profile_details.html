@@ -6,7 +6,10 @@
          <a href="{% url 'add payment' %}">Add payment method</a>
         <a href="{% url 'manage payments' %}">Manage payment methods</a>
     </div>
-
+     <div>
+         <a href="{% url 'add address' %}">Add address</a>
+         <a href="{% url 'manage addresses' %}">Manage addresses</a>
+    </div>
     <p>You have {{ payment_methods|length }} payment methods. </p>
 </body>
 {% endblock %}

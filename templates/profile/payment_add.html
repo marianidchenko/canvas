@@ -10,7 +10,8 @@
             {{ form }}
             {% csrf_token %}
         </div>
-        <button>Add</button>
+        <input type="submit" value="Add">
+        <input type="submit" formnovalidate name="cancel" value="Cancel">
     </form>
 </body>
 </html>
