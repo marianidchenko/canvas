@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for payment_method in payment_methods %}
+        <div>
+        {{ payment_method.card_number|slice:4}} **** **** ****
+        <a href="{% url "edit payment" pk=payment_method.pk %}">Edit</a>
+        <a href="{% url "delete payment" pk=payment_method.pk %}">Remove</a>
+        </div>
+    {% endfor %}
+</body>
+</html>

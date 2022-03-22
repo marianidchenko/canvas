@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<body>
+    <p>You are logged in as: <b>{{ user.profile.username }}</b></p>
+    <div>
+         <a href="{% url 'add payment' %}">Add payment method</a>
+        <a href="{% url 'manage payments' %}">Manage payment methods</a>
+    </div>
+
+    <p>You have {{ payment_methods|length }} payment methods. </p>
+</body>
+{% endblock %}
