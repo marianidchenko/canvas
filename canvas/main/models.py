@@ -27,7 +27,9 @@ class Product(models.Model):
         max_length=DESCRIPTION_MAX_LENGTH,
     )
 
-    product_photo = models.ImageField()
+    product_photo = models.ImageField(
+        upload_to='product_photos/'
+    )
 
     product_quantity = models.IntegerField()
 
@@ -36,14 +38,7 @@ class Product(models.Model):
         max_length=max(len(x) for (x, _) in TYPES),
     )
 
-    @property
-    def out_of_stock(self):
-        if self.product_quantity == 0:
-            return True
-        else:
-            return False
-
-    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 
 
