@@ -14,6 +14,10 @@ class Profile(models.Model):
         null=False,
     )
 
+    profile_photo = models.ImageField(
+        upload_to='profile_photos/'
+    )
+
     user = models.OneToOneField(
         CanvasUser,
         on_delete=models.CASCADE,

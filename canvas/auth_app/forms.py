@@ -11,6 +11,8 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
         max_length=25
     )
 
+    profile_photo = forms.ImageField()
+
     class Meta:
         model = UserModel
         fields = ('email',)
@@ -23,6 +25,7 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
 
         profile = Profile(
             username=self.cleaned_data['username'],
+            profile_photo=self.cleaned_data['profile_photo'],
             user=user,
         )
         if commit:
