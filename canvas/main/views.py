@@ -51,7 +51,7 @@ class CartView(generic_views.ListView):
         context = super().get_context_data(**kwargs)
         total = 0
         for cartitem in CartItem.objects.filter(profile=self.request.user.profile):
-            total += cartitem.product.product_price
+            total += cartitem.product.product_price * cartitem.quantity
         context['total'] = total
         return context
 

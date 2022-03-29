@@ -8,6 +8,9 @@
                 </h1>
                 <h3>
                     ${{ cartitem.product.product_price }}
+                {% if cartitem.quantity > 1 %}
+                   x {{ cartitem.quantity }}
+                {% endif %}
                 </h3>
                         {% endfor %}
             </div>
