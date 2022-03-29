@@ -6,10 +6,11 @@ from django.views import generic as generic_views
 from canvas.profile_app.forms import AddPaymentForm, EditPaymentForm, DeletePaymentForm, AddAddressForm, \
     EditAddressForm, DeleteAddressForm
 from canvas.profile_app.helpers import get_payment_methods
-from canvas.profile_app.models import PaymentMethod, Address
+from canvas.profile_app.models import PaymentMethod, Address, Profile
 
 
-class ProfileDetailsView(LoginRequiredMixin, generic_views.TemplateView):
+class ProfileDetailsView(LoginRequiredMixin, generic_views.DetailView):
+    model = Profile
     template_name = 'profile/profile_details.html'
 
     def get_context_data(self, **kwargs):

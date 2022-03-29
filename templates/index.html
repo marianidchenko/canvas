@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 {% block page_content %}
-<body>
-    <h1>{{ title }}</h1>
-    <h2>Currently signed in as: {{ user.profile.username }}</h2>
-</body>
+    <body>
+    {% if  user.is_authenticated %}
+        <span class="d-block p-2 bg-dark text-white" style="height:90vh">
+            <div class="position-absolute top-50 start-50 translate-middle d-grid gap-3">
+                <h1 style="font-size:45px">Welcome back, {{ user.profile.username }}!</h1>
+                <div class="mx-auto d-col gap-5">
+                    <a href="{% url 'browse' %}" class="btn btn-dark" style="margin-right: 30px; font-size:25px">Browse</a>
+                </div>
+            </div>
+        </span>
+    {% else %}
+        <span class="d-block p-2 bg-dark text-white" style="height:90vh">
+            <div class="position-absolute top-50 start-50 translate-middle d-grid gap-3">
+                <h1 style="font-size:55px">Welcome to Canvas!</h1>
+                <div class="mx-auto d-col gap-5">
+                    <a href="{% url 'register user' %}" class="btn btn-dark" style="margin-right: 30px; font-size:24px">Register</a>
+                    <a href="{% url 'login user' %}" class="btn btn-dark" style="font-size:24px">Login</a>
+                </div>
+            </div>
+        </span>
+    {% endif %}
+    </body>
 {% endblock %}

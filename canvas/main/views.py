@@ -25,6 +25,11 @@ class AllProductsView(generic_views.ListView):
     paginate_by = 10
 
 
+class ProductDetailView(generic_views.DetailView):
+    model = Product
+    template_name = 'product_details.html'
+
+
 class CreateProductView(generic_views.CreateView, LoginRequiredMixin):
     model = Product
     template_name = 'product_create.html'

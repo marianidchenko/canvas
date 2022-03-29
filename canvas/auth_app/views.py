@@ -38,4 +38,4 @@ class UserLogoutView(auth_views.LogoutView):
 
 
 class JustLoggedOutView(generic_views.TemplateView):
-    template_name = 'auth/just_logged_out.html'
+    template_name = 'index.html'

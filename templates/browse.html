@@ -15,6 +15,7 @@
                     <h3>
                         ${{ product.product_price }}
                     </h3>
+                    <a href="{% url 'details' pk=product.pk %}">View Details</a>
                     <a href="{% url 'add to cart' pk=product.pk %}">Add to cart</a>
                 </div>
             </div>
