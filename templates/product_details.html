@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <body style="background:#EFEFF0; color: #656566" >
+    <div class="d-flex gap-4 flex-row bd-highlight mb-3" style="width:100vw">
+        <div class="p-2 bd-highlight ">
+            <img src="{{ product.product_photo.url }}" class="rounded mx-auto d-block image30" alt="">
+        </div>
+        <div class="p-2 bd-highlight flex-grow-1">
+            <h1>
+                {{ product.product_name }} <h5>{{ product.product_type|title }}</h5>
+            </h1>
+            <h3>
+                {{ product.product_description }}
+            </h3>
+            <div>
+                <h3>
+                    ${{ product.product_price }}
+                </h3>
+                <h3>
+                    {{ product.product_quantity }} Currently available
+                </h3>
+                <a href="{% url 'add to cart' pk=product.pk %}" class="btn btn-secondary">Add to cart</a>
+            </div>
+        </div>
+        <div class="p-2 bd-highlight">
+            <div class="p-2 bd-highlight">
+                <img src="{{ product.profile.profile_photo.url }}" class="image15">
+            </div>
+            <div class="p-2 bd-highlight">
+                Artist:
+                <a href="{% url 'profile details' pk=product.profile.pk %}">{{ product.profile.username }}</a>
+            </div>
+        </div>
+
+    </body>
+{% endblock %}
