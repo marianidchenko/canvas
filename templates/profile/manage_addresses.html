@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for address in addresses %}
+        <div>
+            {{ address.country }}, {{ address.city }}, {{ address.details }}
+            <a href="{% url "edit address" pk=address.pk %}">Edit</a>
+            <a href="{% url "delete address" pk=address.pk %}">Remove</a>
+        </div>
+    {% endfor %}
+</body>
+</html>

@@ -38,8 +38,18 @@ class Product(models.Model):
         max_length=max(len(x) for (x, _) in TYPES),
     )
 
+    product_price = models.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+    )
+
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 
-
-
+class CartItem(models.Model):
+    product = models.OneToOneField(
+        Product,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

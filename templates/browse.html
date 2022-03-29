@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <div>
+        {% for product in products %}
+            <div style="border: 2px solid">
+                <img src="{{ product.product_photo.url }}" width="200px" alt="">
+                <h1>
+                    {{ product.product_name }}
+                </h1>
+                <h3>
+                    {{ product.product_description }}
+                </h3>
+                <div>
+                    <h3>
+                        ${{ product.product_price }}
+                    </h3>
+                    <a href="{% url 'add to cart' pk=product.pk %}">Add to cart</a>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}

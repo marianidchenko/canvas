@@ -3,8 +3,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
-from canvas.main.forms import CreateProductFrom
-from canvas.main.models import Product
+from canvas.main.forms import CreateProductFrom, AddToCartForm
+from canvas.main.models import Product, CartItem
 
 
 class IndexView(generic_views.TemplateView):
@@ -39,6 +39,30 @@ class CreateProductView(generic_views.CreateView, LoginRequiredMixin):
             return redirect('index')
         else:
             return super(CreateProductView, self).post(request, *args, **kwargs)
+
+
+class CartView(generic_views.ListView):
+    model = CartItem
+    template_name = 'cart.html'
+    context_object_name = 'cartitems'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        total = 0
+        for cartitem in CartItem.objects.filter(profile=self.request.user.profile):
+            total += cartitem.product.product_price
+        context['total'] = total
+        return context
+
+    def get_queryset(self):
+        return self.model.objects.filter(profile=self.request.user.profile)
+
+
+def add_to_cart_view(request, pk):
+    product = Product.objects.get(pk=pk)
+    cartitem = CartItem.objects.create(product=product, profile=request.user.profile)
+    cartitem.save()
+    return redirect(reverse_lazy('browse'))
 
 
 

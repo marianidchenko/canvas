@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Are you sure you want to delete this address?</h1>
+    <form method="post">
+        <div>
+            {{ form }}
+            {% csrf_token %}
+        </div>
+        <input type="submit" value="Delete">
+        <input type="submit" name="cancel" value="Cancel">
+    </form>
+
+</body>
+</html>

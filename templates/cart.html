@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <div>
+            <div style="border: 2px solid">
+                {% for cartitem in cartitems %}
+                <h1>
+                    {{ cartitem.product.product_name }}
+                </h1>
+                <h3>
+                    ${{ cartitem.product.product_price }}
+                </h3>
+                        {% endfor %}
+            </div>
+    <div>
+        <h3>Total: {{total}}</h3>
+        <a href="#">Place Order</a>
+    </div>
+{% endblock %}
