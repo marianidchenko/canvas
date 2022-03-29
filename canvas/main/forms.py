@@ -14,9 +14,3 @@ class CreateProductFrom(forms.ModelForm):
             'product_price',
             'product_type'
         )
-
-
-class AddToCartForm(forms.ModelForm):
-    class Meta:
-        model = Product
-        exclude = ('product', 'profile')

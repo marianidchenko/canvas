@@ -47,6 +47,7 @@ class Product(models.Model):
 
 
 class CartItem(models.Model):
+    quantity = models.IntegerField()
     product = models.OneToOneField(
         Product,
         on_delete=models.CASCADE,

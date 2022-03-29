@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import IntegrityError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
-from canvas.main.forms import CreateProductFrom, AddToCartForm
+from canvas.main.forms import CreateProductFrom
 from canvas.main.models import Product, CartItem
 
 
@@ -60,8 +61,15 @@ class CartView(generic_views.ListView):
 
 def add_to_cart_view(request, pk):
     product = Product.objects.get(pk=pk)
-    cartitem = CartItem.objects.create(product=product, profile=request.user.profile)
+    product.product_quantity -= 1
+    try:
+        cartitem = CartItem.objects.create(product=product, profile=request.user.profile, quantity=1)
+    except IntegrityError:
+        cartitem = CartItem.objects.filter(profile=request.user.profile)[0]
+        cartitem.quantity += 1
     cartitem.save()
+    product.product_quantity -= 1
+    product.save()
     return redirect(reverse_lazy('browse'))
 
 
