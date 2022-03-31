@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Place Order">
+        <input type="submit" formnovalidate name="cancel" value="Cancel">
+    </form>
+{% endblock %}

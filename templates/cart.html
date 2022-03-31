@@ -1,21 +1,26 @@
 {% extends 'base.html' %}
 {% block page_content %}
     <div>
-            <div style="border: 2px solid">
+        <div style="border: 2px solid">
+            {% if cartitems %}
                 {% for cartitem in cartitems %}
-                <h1>
-                    {{ cartitem.product.product_name }}
-                </h1>
-                <h3>
-                    ${{ cartitem.product.product_price }}
-                {% if cartitem.quantity > 1 %}
-                   x {{ cartitem.quantity }}
-                {% endif %}
-                </h3>
-                        {% endfor %}
-            </div>
-    <div>
-        <h3>Total: {{total}}</h3>
-        <a href="#">Place Order</a>
-    </div>
+                    <h1>
+                        {{ cartitem.product.product_name }}
+                    </h1>
+                    <h3>
+                        ${{ cartitem.product.product_price }}
+                        {% if cartitem.quantity > 1 %}
+                            x {{ cartitem.quantity }}
+                        {% endif %}
+                    </h3>
+                {% endfor %}
+                </div>
+                <div>
+                    <h3>Total: {{ total }}</h3>
+                    <a href="{% url 'checkout' %}">Checkout</a>
+                </div>
+            {% else %}
+                <p>You do not currently have any items in your cart.</p>
+                <a href="{% url 'browse' %}">Browse More Art</a>
+            {% endif %}
 {% endblock %}

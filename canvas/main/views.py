@@ -4,7 +4,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
-from canvas.main.forms import CreateProductFrom
+from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress
+from canvas.main.helpers import get_total_cart_price, get_available_payment_methods, get_available_addresses
 from canvas.main.models import Product, CartItem
 
 
@@ -53,15 +54,41 @@ class CartView(generic_views.ListView):
     context_object_name = 'cartitems'
 
     def get_context_data(self, **kwargs):
+        current_profile = self.request.user.profile
         context = super().get_context_data(**kwargs)
-        total = 0
-        for cartitem in CartItem.objects.filter(profile=self.request.user.profile):
-            total += cartitem.product.product_price * cartitem.quantity
-        context['total'] = total
+        context['total'] = get_total_cart_price(current_profile)
+        context['cards'] = get_available_payment_methods(current_profile)
+        context['addresses'] = get_available_addresses(current_profile)
+        context['form'] = ChooseCardAndAddress
         return context
 
     def get_queryset(self):
         return self.model.objects.filter(profile=self.request.user.profile)
+
+
+class CheckoutView(generic_views.TemplateView):
+    template_name = 'checkout.html'
+
+    def get_context_data(self, **kwargs):
+        current_profile = self.request.user.profile
+        context = super().get_context_data(**kwargs)
+        context['total'] = get_total_cart_price(current_profile)
+        context['items'] = CartItem.objects.filter(profile=current_profile)
+        context['cards'] = get_available_payment_methods(current_profile)
+        context['addresses'] = get_available_addresses(current_profile)
+        context['form'] = ChooseCardAndAddress
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect('cart')
+        else:
+            CartItem.objects.filter(profile=request.user.profile).delete()
+            return redirect('purchased')
+
+
+class PurchasedView(generic_views.TemplateView):
+    template_name = 'purchased.html'
 
 
 def add_to_cart_view(request, pk):

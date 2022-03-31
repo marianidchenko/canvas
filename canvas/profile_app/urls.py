@@ -3,7 +3,7 @@ from canvas.profile_app.views import AddPaymentMethodView, ProfileDetailsView, E
     ManagePaymentMethodsView, DeletePaymentView, AddAddressView, ManageAddressesView, EditAddressView, DeleteAddressView
 
 urlpatterns = (
-    path('<int:pk>/', ProfileDetailsView.as_view(), name='profile details'),
+    path('', ProfileDetailsView.as_view(), name='profile details'),
 
     path('manage_payments/', ManagePaymentMethodsView.as_view(), name='manage payments'),
     path('payment/add/', AddPaymentMethodView.as_view(), name='add payment'),

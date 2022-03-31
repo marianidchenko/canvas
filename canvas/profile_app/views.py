@@ -9,7 +9,7 @@ from canvas.profile_app.helpers import get_payment_methods
 from canvas.profile_app.models import PaymentMethod, Address, Profile
 
 
-class ProfileDetailsView(LoginRequiredMixin, generic_views.DetailView):
+class ProfileDetailsView(LoginRequiredMixin, generic_views.TemplateView):
     model = Profile
     template_name = 'profile/profile_details.html'
 
