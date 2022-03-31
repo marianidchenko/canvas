@@ -100,9 +100,8 @@ def add_to_cart_view(request, pk):
         cartitem = CartItem.objects.filter(profile=request.user.profile)[0]
         cartitem.quantity += 1
     cartitem.save()
-    product.product_quantity -= 1
     product.save()
-    return redirect(reverse_lazy('browse'))
+    return redirect('browse')
 
 
 

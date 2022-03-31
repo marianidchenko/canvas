@@ -9,3 +9,11 @@
 .image50 {
     width: 50vw;
 }
+
+.thumbnail-navbar{
+    object-fit: cover;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+}
+
