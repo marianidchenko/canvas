@@ -96,11 +96,10 @@ def add_to_cart_view(request, pk):
     current_profile = request.user.profile
     product.product_quantity -= 1
     product.save()
-    cartitem = CartItem.objects.filter(profile = current_profile, product_name=product.product_name)
+    cartitem = CartItem.objects.filter(profile=current_profile, product=product)
     if not cartitem:
         cartitem = CartItem.objects.create(
-            product_name=product.product_name,
-            product_price=product.product_price,
+            product=product,
             profile=current_profile
         )
     else:

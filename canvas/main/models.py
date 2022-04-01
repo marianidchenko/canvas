@@ -48,16 +48,6 @@ class Product(models.Model):
 
 
 class CartItem(models.Model):
-    PRODUCT_NAME_MAX_LENGTH = 45
     quantity = models.IntegerField(default=0)
-    product_name = models.CharField(
-        max_length=PRODUCT_NAME_MAX_LENGTH,
-        blank=False,
-        null=False,
-    )
-    product_price = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-    )
-
+    product = models.ForeignKey(Product, unique=False, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, unique=False, on_delete=models.CASCADE)

@@ -10,7 +10,7 @@ def get_total_price(current_profile):
     total = 0
     cart_items = get_cart_items(current_profile)
     for item in cart_items:
-        total += item.product_price * item.quantity
+        total += item.product.product_price * item.quantity
     return total
 
 
