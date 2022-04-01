@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
 from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress
-from canvas.main.helpers import get_total_cart_price, get_available_payment_methods, get_available_addresses
+from canvas.main.helpers import get_available_payment_methods, get_available_addresses, get_cart_items, get_total_price
 from canvas.main.models import Product, CartItem
 
 
@@ -43,7 +43,7 @@ class CreateProductView(generic_views.CreateView, LoginRequiredMixin):
 
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
-            return redirect('index')
+            return redirect('browse')
         else:
             return super(CreateProductView, self).post(request, *args, **kwargs)
 
@@ -56,7 +56,7 @@ class CartView(generic_views.ListView):
     def get_context_data(self, **kwargs):
         current_profile = self.request.user.profile
         context = super().get_context_data(**kwargs)
-        context['total'] = get_total_cart_price(current_profile)
+        context['total'] = get_total_price(current_profile)
         context['cards'] = get_available_payment_methods(current_profile)
         context['addresses'] = get_available_addresses(current_profile)
         context['form'] = ChooseCardAndAddress
@@ -72,8 +72,8 @@ class CheckoutView(generic_views.TemplateView):
     def get_context_data(self, **kwargs):
         current_profile = self.request.user.profile
         context = super().get_context_data(**kwargs)
-        context['total'] = get_total_cart_price(current_profile)
-        context['items'] = CartItem.objects.filter(profile=current_profile)
+        context['items'] = get_cart_items(current_profile)
+        context['total'] = get_total_price(current_profile)
         context['cards'] = get_available_payment_methods(current_profile)
         context['addresses'] = get_available_addresses(current_profile)
         context['form'] = ChooseCardAndAddress
@@ -83,7 +83,7 @@ class CheckoutView(generic_views.TemplateView):
         if "cancel" in request.POST:
             return redirect('cart')
         else:
-            CartItem.objects.filter(profile=request.user.profile).delete()
+            # CartItem.objects.filter(profile=request.user.profile).delete()
             return redirect('purchased')
 
 
@@ -93,14 +93,20 @@ class PurchasedView(generic_views.TemplateView):
 
 def add_to_cart_view(request, pk):
     product = Product.objects.get(pk=pk)
+    current_profile = request.user.profile
     product.product_quantity -= 1
-    try:
-        cartitem = CartItem.objects.create(product=product, profile=request.user.profile, quantity=1)
-    except IntegrityError:
-        cartitem = CartItem.objects.filter(profile=request.user.profile)[0]
-        cartitem.quantity += 1
-    cartitem.save()
     product.save()
+    cartitem = CartItem.objects.filter(profile = current_profile, product_name=product.product_name)
+    if not cartitem:
+        cartitem = CartItem.objects.create(
+            product_name=product.product_name,
+            product_price=product.product_price,
+            profile=current_profile
+        )
+    else:
+        cartitem = cartitem[0]
+    cartitem.quantity += 1
+    cartitem.save()
     return redirect('browse')
 
 

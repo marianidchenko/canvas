@@ -1,5 +1,4 @@
 from django.db import models
-
 from canvas.profile_app.models import Profile
 
 
@@ -43,14 +42,22 @@ class Product(models.Model):
         decimal_places=2,
     )
 
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE,
+    )
 
 
 class CartItem(models.Model):
-    quantity = models.IntegerField()
-    product = models.OneToOneField(
-        Product,
-        on_delete=models.CASCADE,
-        primary_key=True,
+    PRODUCT_NAME_MAX_LENGTH = 45
+    quantity = models.IntegerField(default=0)
+    product_name = models.CharField(
+        max_length=PRODUCT_NAME_MAX_LENGTH,
+        blank=False,
+        null=False,
     )
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    product_price = models.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+    )
+
+    profile = models.ForeignKey(Profile, unique=False, on_delete=models.CASCADE)

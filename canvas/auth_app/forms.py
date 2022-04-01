@@ -28,6 +28,7 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
             profile_photo=self.cleaned_data['profile_photo'],
             user=user,
         )
+
         if commit:
             profile.save()
 

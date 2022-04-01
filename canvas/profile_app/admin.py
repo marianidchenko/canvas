@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from canvas.profile_app.models import Address, PaymentMethod
+from canvas.profile_app.models import Address, PaymentMethod, Profile
 
 
 @admin.register(Address)
@@ -14,4 +14,6 @@ class PaymentMethodAdmin(admin.ModelAdmin):
     pass
 
 
-
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ("username", "user")

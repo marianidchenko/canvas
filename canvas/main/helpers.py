@@ -2,11 +2,16 @@ from canvas.main.models import CartItem
 from canvas.profile_app.models import PaymentMethod, Address
 
 
-def get_total_cart_price(current_profile):
-    total_price = 0
-    for cartitem in CartItem.objects.filter(profile=current_profile):
-        total_price += cartitem.product.product_price * cartitem.quantity
-    return total_price
+def get_cart_items(current_profile):
+    return CartItem.objects.filter(profile=current_profile)
+
+
+def get_total_price(current_profile):
+    total = 0
+    cart_items = get_cart_items(current_profile)
+    for item in cart_items:
+        total += item.product_price * item.quantity
+    return total
 
 
 def get_available_payment_methods(current_profile):

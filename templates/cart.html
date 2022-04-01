@@ -5,10 +5,10 @@
             {% if cartitems %}
                 {% for cartitem in cartitems %}
                     <h1>
-                        {{ cartitem.product.product_name }}
+                        {{ cartitem.product_name }}
                     </h1>
                     <h3>
-                        ${{ cartitem.product.product_price }}
+                        ${{ cartitem.product_price }}
                         {% if cartitem.quantity > 1 %}
                             x {{ cartitem.quantity }}
                         {% endif %}

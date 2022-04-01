@@ -6,10 +6,11 @@ from canvas.main.models import Product, CartItem
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("product_name", "product_description", "product_quantity", "profile")
+    search_fields = ("product_name",)
+    fields = ("product_name", "product_description", "product_photo")
 
 
 @admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
+class CartItem(admin.ModelAdmin):
     pass
-

@@ -6,6 +6,8 @@ from canvas.auth_app.models import CanvasUser
 
 
 class Profile(models.Model):
+    def __str__(self):
+        return self.username
     # Username is not for auth but instead a public screen name
     username = models.CharField(
         max_length=25,
@@ -301,8 +303,11 @@ class Address(models.Model):
 
 
 class PaymentMethod(models.Model):
+
+    def __str__(self):
+        return f"**** **** **** {self.card_number[-4:]}"
+
     # Mock payment method for the sake of the demo
-    # TODO add removing system in profile deletion if card is not used in another profile
     card_number = CardNumberField()
 
     card_expiry = CardExpiryField()
