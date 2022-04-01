@@ -1,36 +1,61 @@
 {% extends 'base.html' %}
 {% block page_content %}
-    <body style="background:#EFEFF0; color: #656566" >
-    <div class="d-flex gap-4 flex-row bd-highlight mb-3" style="width:100vw">
-        <div class="p-2 bd-highlight ">
-            <img src="{{ product.product_photo.url }}" class="rounded mx-auto d-block image30" alt="">
+    <span class="d-block p-2 bg-dark text-white" style="height:90vh">
+        <div class="card mb-3 d-flex flex-col" style="margin:40px; min-height:65vh; background-color:#353438">
+      <div class="row g-0">
+        <div class="col-md-4 p-4">
+          <img src="{{ product.product_photo.url }}" class="img-fluid rounded-start" style="margin:5px" alt="...">
         </div>
-        <div class="p-2 bd-highlight flex-grow-1">
-            <h1>
-                {{ product.product_name }} <h5>{{ product.product_type|title }}</h5>
-            </h1>
-            <h3>
-                {{ product.product_description }}
-            </h3>
-            <div>
-                <h3>
-                    ${{ product.product_price }}
-                </h3>
-                <h3>
-                    {{ product.product_quantity }} Currently available
-                </h3>
-                <a href="{% url 'add to cart' pk=product.pk %}" class="btn btn-secondary">Add to cart</a>
-            </div>
-        </div>
-        <div class="p-2 bd-highlight">
-            <div class="p-2 bd-highlight">
-                <img src="{{ product.profile.profile_photo.url }}" class="image15">
-            </div>
-            <div class="p-2 bd-highlight">
-                Artist:
-                <a href="#">{{ product.profile.username }}</a>
-            </div>
-        </div>
+        <div class="col-md-5 p-4">
+          <div class="card-body">
+            <h5 class="card-title" style="margin-bottom:25px">{{ product.product_name }}</h5>
+            <p class="card-text">{{ product.product_description }}</p>
+              <p class="card-text">Current amount available: {{ product.product_quantity }}</p>
+            <p class="card-text"><small class="text-white">${{ product.product_price }}</small></p>
+              <a href="{% url 'add to cart' pk=product.pk %}" class="btn btn-secondary">Add to cart</a>
 
-    </body>
+          </div>
+        </div>
+          <div class="col-md-3 p-4">
+          <div class="p-2 bd-highlight">
+                    <img src="{{ product.profile.profile_photo.url }}" class="thumbnail-profile mx-auto d-block rounded-start">
+                </div>
+                <div class="p-2 bd-highlight mx-auto d-block">
+                    Artist:
+                    <a href="#" style="color:white">{{ product.profile.username }}</a>
+                </div>
+        </div>
+      </div>
+    </div>
+
+{#        <div class="p-2 bd-highlight ">#}
+{#            <img src="{{ product.product_photo.url }}" class="rounded mx-auto d-block image30" alt="">#}
+{#        </div>#}
+{#        <div class="p-2 bd-highlight flex-grow-1">#}
+{#            <h1>#}
+{#                {{ product.product_name }} <h5>{{ product.product_type|title }}</h5>#}
+{#            </h1>#}
+{#            <h3>#}
+{#                {{ product.product_description }}#}
+{#            </h3>#}
+{#            <div>#}
+{#                <h3>#}
+{#                    ${{ product.product_price }}#}
+{#                </h3>#}
+{#                <h3>#}
+{#                    {{ product.product_quantity }} Currently available#}
+{#                </h3>#}
+{#                <a href="{% url 'add to cart' pk=product.pk %}" class="btn btn-secondary">Add to cart</a>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="p-2 bd-highlight">#}
+{#            <div class="p-2 bd-highlight">#}
+{#                <img src="{{ product.profile.profile_photo.url }}" class="image15">#}
+{#            </div>#}
+{#            <div class="p-2 bd-highlight">#}
+{#                Artist:#}
+{#                <a href="#">{{ product.profile.username }}</a>#}
+{#            </div>#}
+{#        </div>#}
+    </span>
 {% endblock %}

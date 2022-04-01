@@ -19,7 +19,15 @@
 
 .thumbnail-browse{
     min-height:30vh;
-    max-height: 30vh;
+    max-height:30vh;
     object-fit: cover;
     overflow: hidden;
+}
+
+.thumbnail-profile{
+    min-height:15vw;
+    max-width: 15vw;
+    object-fit: cover;
+    overflow: hidden;
+    border: 1px solid;
 }
