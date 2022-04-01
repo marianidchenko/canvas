@@ -15,7 +15,15 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
 
     class Meta:
         model = UserModel
-        fields = ('email',)
+        fields = ('email', )
+        widgets = {
+            'email': forms.TextInput(attrs={
+                'type': 'email',
+                'class': 'form-control',
+                'id': 'email',
+                'placeholder': 'name@example.com',
+            }),
+        }
 
     def clean_email(self):
         return self.cleaned_data['email']
@@ -33,4 +41,3 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
             profile.save()
 
         return user
-

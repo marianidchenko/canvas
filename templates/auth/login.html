@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form method="post">
-    {{ form }}
-    {% csrf_token %}
-    <button>Login</button>
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block page_content %}
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <span class="d-block p-2 bg-dark text-white" style="height:90vh">
+    <div class="p-5 bd-highlight d-grid gap-3 row justify-content-center align-items-center">
+        {% for field in form %}
+            <div class="mb-1">
+                    <label class="form-label">{{ field.label }}:</label>
+            </div>
+            {{ field }}
+            {% if field.errors %}
+                <div class="border-bottom-danger">
+                        {{ field.errors }}
+                    </div>
+            {% endif %}
+        {% endfor %}
+        <div class="row justify-content-center align-items-center">
+        <button type="submit" class="btn btn-secondary" style="margin-top:20px">Login</button>
+    </div>
+    </div>
+</span>
+    </form>
+{% endblock %}
