@@ -14,6 +14,10 @@ class CreateProductFrom(forms.ModelForm):
             'product_price',
             'product_type'
         )
+        widgets = {
+            'product_description': forms.Textarea(attrs={'rows': 3}),
+            'product_photo': forms.FileInput(attrs={'class': 'form-control'}),
+        }
 
 
 class CardChoiceField(forms.ModelChoiceField):
