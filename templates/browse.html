@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
 {% block page_content %}
-    <div>
+     <span class="d-block p-2 text-white" style="height:90vh; background-color:#353438">
+    <div class="d-flex flex-wrap">
         {% for product in products %}
             {% if product.product_quantity > 0 %}
-            <div style="border: 2px solid">
-                <img src="{{ product.product_photo.url }}" width="200px" alt="">
-                <h1>
-                    {{ product.product_name }}
-                </h1>
-                <h3>
-                    {{ product.product_description }}
-                </h3>
-                <div>
-                    <h3>
-                        ${{ product.product_price }}
-                    </h3>
-                    <a href="{% url 'details' pk=product.pk %}">View Details</a>
-                    <a href="{% url 'add to cart' pk=product.pk %}">Add to cart</a>
+                <div class="p-3 bd-highlight">
+                    <div class="card" style="width: 18rem; border-color:black">
+                        <img src="{{ product.product_photo.url }}" class="card-img-top thumbnail-browse" alt="...">
+                        <div class="card-body" style="background-color:#262528;">
+                            <h5 class="card-title">{{ product.product_name }}</h5>
+                            <p class="card-text">{{ product.product_description }}</p>
+                            <p class="card-text">${{ product.product_price }}</p>
+                            <a href="{% url 'details' pk=product.pk %}" class="btn btn-secondary">View Details</a>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'add to cart' pk=product.pk %}" class="btn btn-secondary">Add to
+                                    cart</a>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-            </div>
             {% endif %}
         {% endfor %}
+    </span>
 {% endblock %}

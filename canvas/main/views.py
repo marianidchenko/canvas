@@ -48,7 +48,7 @@ class CreateProductView(generic_views.CreateView, LoginRequiredMixin):
             return super(CreateProductView, self).post(request, *args, **kwargs)
 
 
-class CartView(generic_views.ListView):
+class CartView(generic_views.ListView, LoginRequiredMixin):
     model = CartItem
     template_name = 'cart.html'
     context_object_name = 'cartitems'
@@ -66,7 +66,7 @@ class CartView(generic_views.ListView):
         return self.model.objects.filter(profile=self.request.user.profile)
 
 
-class CheckoutView(generic_views.TemplateView):
+class CheckoutView(generic_views.TemplateView, LoginRequiredMixin):
     template_name = 'checkout.html'
 
     def get_context_data(self, **kwargs):
@@ -87,7 +87,7 @@ class CheckoutView(generic_views.TemplateView):
             return redirect('purchased')
 
 
-class PurchasedView(generic_views.TemplateView):
+class PurchasedView(generic_views.TemplateView, LoginRequiredMixin):
     template_name = 'purchased.html'
 
 
