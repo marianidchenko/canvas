@@ -35,7 +35,7 @@ class CreateProductView(generic_views.CreateView, LoginRequiredMixin):
     model = Product
     template_name = 'product_create.html'
     form_class = CreateProductFrom
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('manage products')
 
     def form_valid(self, form):
         form.instance.profile = self.request.user.profile

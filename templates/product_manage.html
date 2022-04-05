@@ -2,6 +2,7 @@
 {% block page_content %}
     <span class="d-block p-2 text-white" style="; margin:30px; background-color:#353438">
     <div class="d-flex flex-wrap">
+        {% if products %}
         {% for product in products %}
             <div class="p-3 bd-highlight">
                     <div class="card" style="width: 18rem; border-color:black">
@@ -19,6 +20,14 @@
                     </div>
                 </div>
         {% endfor %}
+    {% else %}
+            <div class="card-body">
+            <div class="mx-auto d-col gap-5" style="align-content:center; justify-content: center;">
+                <p class="card-text">You do not currently have any items in your profile.</p>
+                <a href="{% url 'add product' %}" class="btn btn-secondary">Add an item</a>
+            </div>
+            </div>
+    {% endif %}
     </div>
     </span>
 {% endblock %}
