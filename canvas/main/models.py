@@ -15,6 +15,7 @@ class Product(models.Model):
 
     PRODUCT_NAME_MAX_LENGTH = 45
     DESCRIPTION_MAX_LENGTH = 250
+    PRODUCT_QUANTITY_MIN = 0
 
     product_name = models.CharField(
         max_length=PRODUCT_NAME_MAX_LENGTH,
@@ -30,7 +31,7 @@ class Product(models.Model):
         upload_to='product_photos/'
     )
 
-    product_quantity = models.IntegerField()
+    product_quantity = models.PositiveIntegerField()
 
     product_type = models.CharField(
         choices=TYPES,
