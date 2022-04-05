@@ -3,7 +3,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
-from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress, ProductEditForm, ProductRestockForm
+from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress, ProductEditForm, ProductRestockForm, \
+    ProductDeleteForm
 from canvas.main.helpers import get_available_payment_methods, get_available_addresses, get_cart_items, get_total_price
 from canvas.main.models import Product, CartItem
 
@@ -129,3 +130,16 @@ class RestockProductView(generic_views.UpdateView):
     template_name = 'product_restock.html'
     form_class = ProductRestockForm
     success_url = reverse_lazy('manage products')
+
+
+class DeleteProductView(generic_views.DeleteView):
+    model = Product
+    template_name = 'product_delete.html'
+    form_class = ProductDeleteForm
+    success_url = reverse_lazy('manage products')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect('manage products')
+        else:
+            return super(DeleteProductView, self).post(request, *args, **kwargs)

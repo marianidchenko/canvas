@@ -59,3 +59,17 @@ class ProductRestockForm(forms.ModelForm):
         fields = (
             'product_quantity',
         )
+
+
+class ProductDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        exclude = (
+            'product_name',
+            'product_description',
+            'product_photo',
+            'product_quantity',
+            'product_price',
+            'product_type',
+            'profile'
+        )
