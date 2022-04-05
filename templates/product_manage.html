@@ -12,7 +12,7 @@
                             <p class="card-text">${{ product.product_price }}</p>
                             <a href="{% url 'edit product' pk=product.pk %}" class="btn btn-secondary">Edit</a>
                             {% if product.product_quantity <= 0 %}
-                                <a href="#" class="btn btn-secondary">Restock</a>
+                                <a href="{% url 'restock product' pk=product.pk %}" class="btn btn-secondary">Restock</a>
                             {% endif %}
                         </div>
                     </div>

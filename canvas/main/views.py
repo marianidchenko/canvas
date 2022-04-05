@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
-from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress, ProductEditForm
+from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress, ProductEditForm, ProductRestockForm
 from canvas.main.helpers import get_available_payment_methods, get_available_addresses, get_cart_items, get_total_price
 from canvas.main.models import Product, CartItem
 
@@ -121,4 +121,11 @@ class EditProductView(generic_views.UpdateView):
     model = Product
     template_name = 'product_edit.html'
     form_class = ProductEditForm
+    success_url = reverse_lazy('manage products')
+
+
+class RestockProductView(generic_views.UpdateView):
+    model = Product
+    template_name = 'product_restock.html'
+    form_class = ProductRestockForm
     success_url = reverse_lazy('manage products')

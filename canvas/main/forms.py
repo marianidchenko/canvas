@@ -51,3 +51,11 @@ class ProductEditForm(forms.ModelForm):
             'product_description': forms.Textarea(attrs={'rows': 3}),
             'product_photo': forms.FileInput(attrs={'class': 'form-control'}),
         }
+
+
+class ProductRestockForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = (
+            'product_quantity',
+        )
