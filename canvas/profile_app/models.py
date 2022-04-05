@@ -5,30 +5,7 @@ from creditcards import types
 from canvas.auth_app.models import CanvasUser
 
 
-class Profile(models.Model):
-    def __str__(self):
-        return self.username
-    # Username is not for auth but instead a public screen name
-    username = models.CharField(
-        max_length=25,
-        unique=True,
-        blank=False,
-        null=False,
-    )
-
-    profile_photo = models.ImageField(
-        upload_to='profile_photos/'
-    )
-
-    user = models.OneToOneField(
-        CanvasUser,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
-
-
-class Address(models.Model):
-    COUNTRIES = (
+COUNTRIES = (
         ('AF', 'Afghanistan',),
         ('AX', 'Aland Islands',),
         ('AL', 'Albania',),
@@ -279,6 +256,42 @@ class Address(models.Model):
         ('ZM', 'Zambia',),
         ('ZW', 'Zimbabwe',),
     )
+
+
+class Profile(models.Model):
+    def __str__(self):
+        return self.username
+    # Username is not for auth but instead a public screen name
+    username = models.CharField(
+        max_length=25,
+        unique=True,
+        blank=False,
+        null=False,
+    )
+
+    profile_photo = models.ImageField(
+        upload_to='profile_photos/'
+    )
+
+    user = models.OneToOneField(
+        CanvasUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+
+    description = models.TextField(
+        null=True, blank=True,
+    )
+
+    country = models.CharField(
+        max_length=max(len(x) for (x, _) in COUNTRIES),
+        null=True,
+        blank=True,
+        choices=COUNTRIES,
+    )
+
+
+class Address(models.Model):
 
     country = models.CharField(
         max_length=max(len(x) for (x, _) in COUNTRIES),

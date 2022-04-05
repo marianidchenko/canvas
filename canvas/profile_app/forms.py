@@ -1,5 +1,19 @@
 from django import forms
-from canvas.profile_app.models import PaymentMethod, Address
+from canvas.profile_app.models import PaymentMethod, Address, Profile
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = (
+            'username',
+            'profile_photo',
+            'description',
+            'country'
+        )
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4}),
+        }
 
 
 class AddPaymentForm(forms.ModelForm):
@@ -7,9 +21,9 @@ class AddPaymentForm(forms.ModelForm):
         model = PaymentMethod
         fields = ('card_number', 'card_expiry', 'card_cvv')
         labels = {
-            'card_number': 'Enter card number:',
-            'card_expiry': 'Enter expiration date:',
-            'card_cvv': 'Enter the security code (CVV/CVC):'
+            'card_number': 'Enter card number',
+            'card_expiry': 'Enter expiration date',
+            'card_cvv': 'Enter the security code (CVV/CVC)'
         }
 
 
@@ -39,7 +53,7 @@ class AddAddressForm(forms.ModelForm):
         model = Address
         fields = ('country', 'city', 'details')
         labels = {
-            'details': 'Enter street name and number:',
+            'details': 'Enter street name and number',
         }
 
 

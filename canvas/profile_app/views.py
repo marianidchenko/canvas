@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 from canvas.profile_app.forms import AddPaymentForm, EditPaymentForm, DeletePaymentForm, AddAddressForm, \
-    EditAddressForm, DeleteAddressForm
+    EditAddressForm, DeleteAddressForm, EditProfileForm
 from canvas.profile_app.helpers import get_payment_methods
 from canvas.profile_app.models import PaymentMethod, Address, Profile
 
@@ -16,9 +16,17 @@ class ProfileDetailsView(LoginRequiredMixin, generic_views.TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Welcome to Canvas'
         context['user'] = self.request.user
+        context['profile'] = self.request.user.profile
         payment_methods = get_payment_methods(self.request.user.pk)
         context['payment_methods'] = payment_methods
         return context
+
+
+class EditProfileView(generic_views.UpdateView, LoginRequiredMixin):
+    model = Profile
+    template_name = 'profile/profile_edit.html'
+    success_url = reverse_lazy('profile details')
+    form_class = EditProfileForm
 
 
 class AddPaymentMethodView(LoginRequiredMixin, generic_views.CreateView):

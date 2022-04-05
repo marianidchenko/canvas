@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_tags %}
 {% block page_content %}
     <span class="d-block p-2 text-white" style="; margin:30px; background-color:#353438">
     <div class="d-flex flex-wrap">
@@ -9,7 +10,7 @@
                         <img src="{{ product.product_photo.url }}" class="card-img-top thumbnail-browse" alt="...">
                         <div class="card-body" style="background-color:#262528;">
                             <h5 class="card-title">{{ product.product_name }}</h5>
-                            <p class="card-text">{{ product.product_description }}</p>
+                            <p class="card-text">{{ product.product_description|truncatesmart:30 }}</p>
                             <p class="card-text">${{ product.product_price }}</p>
                             <a href="{% url 'edit product' pk=product.pk %}" class="btn btn-secondary">Edit</a>
                             {% if product.product_quantity <= 0 %}

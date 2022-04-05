@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block page_content %}
+    <a href="{% url "add address" %}">Add an address</a>
     {% for address in addresses %}
         <div>
             {{ address.country }}, {{ address.city }}, {{ address.details }}
@@ -12,5 +8,4 @@
             <a href="{% url "delete address" pk=address.pk %}">Remove</a>
         </div>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
