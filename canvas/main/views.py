@@ -1,10 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import IntegrityError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
-from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress
+from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress, ProductEditForm
 from canvas.main.helpers import get_available_payment_methods, get_available_addresses, get_cart_items, get_total_price
 from canvas.main.models import Product, CartItem
 
@@ -109,4 +108,17 @@ def add_to_cart_view(request, pk):
     return redirect('browse')
 
 
+class ManageProductsView(generic_views.ListView, LoginRequiredMixin):
+    model = Product
+    template_name = 'product_manage.html'
+    context_object_name = 'products'
 
+    def get_queryset(self):
+        return self.model.objects.filter(profile=self.request.user.profile)
+
+
+class EditProductView(generic_views.UpdateView):
+    model = Product
+    template_name = 'product_edit.html'
+    form_class = ProductEditForm
+    success_url = reverse_lazy('manage products')

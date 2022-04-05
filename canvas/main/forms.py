@@ -34,3 +34,20 @@ class AddressChoiceField(forms.ModelChoiceField):
 class ChooseCardAndAddress(forms.Form):
     card = CardChoiceField(queryset=PaymentMethod.objects.all())
     address = AddressChoiceField(queryset=Address.objects.all())
+
+
+class ProductEditForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = (
+            'product_name',
+            'product_description',
+            'product_photo',
+            'product_quantity',
+            'product_price',
+            'product_type'
+        )
+        widgets = {
+            'product_description': forms.Textarea(attrs={'rows': 3}),
+            'product_photo': forms.FileInput(attrs={'class': 'form-control'}),
+        }
