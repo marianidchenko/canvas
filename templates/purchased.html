@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block page_content %}
-    Thank you for the purchase!
-    <a href="{% url 'browse' %}">Browse More Art</a>
+     <span class="d-block p-2 bg-dark text-white" style="height:90vh;">
+     <div class="position-absolute top-50 start-50 translate-middle d-grid gap-3">
+         <h1 style="font-size:36px">Thank you for the purhcase, {{ user.profile.username }}!</h1>
+         <div class="mx-auto d-col gap-5" style="align-content:center; justify-content: center;">
+             <a href="{% url 'browse' %}" class="button-7" style="font-size:25px">Browse More Art</a>
+         </div>
+     </div>
+     </span>
 {% endblock %}

@@ -31,7 +31,9 @@ class AddressChoiceField(forms.ModelChoiceField):
 
 
 class ChooseCardAndAddress(forms.Form):
-    card = CardChoiceField(queryset=PaymentMethod.objects.all())
+    card = CardChoiceField(
+        queryset=PaymentMethod.objects.all()
+    )
     address = AddressChoiceField(queryset=Address.objects.all())
 
 

@@ -83,7 +83,7 @@ class CheckoutView(generic_views.TemplateView, LoginRequiredMixin):
         if "cancel" in request.POST:
             return redirect('cart')
         else:
-            # CartItem.objects.filter(profile=request.user.profile).delete()
+            CartItem.objects.filter(profile=request.user.profile).delete()
             return redirect('purchased')
 
 

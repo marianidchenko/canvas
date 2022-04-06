@@ -13,6 +13,8 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
 
     profile_photo = forms.ImageField()
 
+    shop_banner = forms.ImageField()
+
     class Meta:
         model = UserModel
         fields = ('email', )
@@ -34,6 +36,7 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
         profile = Profile(
             username=self.cleaned_data['username'],
             profile_photo=self.cleaned_data['profile_photo'],
+            shop_banner=self.cleaned_data['shop_banner'],
             user=user,
         )
 

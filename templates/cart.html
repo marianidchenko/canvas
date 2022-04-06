@@ -10,10 +10,16 @@
                 </div>
             </div>
             <div class="d-flex flex-column pt-4">
+                {% if cartitems %}
                 <div>
                     <h5 class="text-uppercase font-weight-normal">shopping cart</h5>
                 </div>
                 <div class="font-weight-normal">{{ cartitems|length }}</div>
+                {% else %}
+                    <div class="font-weight-normal">You do not have any items in your cart
+                    <a href="{% url 'browse' %}" class="button-7" style="font-size:16px; margin-left: 20px">Browse</a>
+                    </div>
+                {% endif %}
             </div>
             {% for cartitem in cartitems %}
             <div class="d-flex flex-row justify-content-between align-items-center pt-4 pb-3 mobile">
@@ -35,6 +41,7 @@
         </div>
     </div>
 </div>
+    {% if cartitems %}
 <div class="container bg-dark text-light rounded-bottom py-4" id="zero-pad">
     <div class="row d-flex justify-content-center">
         <div class="col-lg-10 col-12">
@@ -45,27 +52,5 @@
         </div>
     </div>
 </div>
-    <div>
-        <div style="border: 2px solid">
-            {% if cartitems %}
-                {% for cartitem in cartitems %}
-                    <h1>
-                        {{ cartitem.product.product_name }}
-                    </h1>
-                    <h3>
-                        ${{ cartitem.product.product_price }}
-                        {% if cartitem.quantity > 1 %}
-                            x {{ cartitem.quantity }}
-                        {% endif %}
-                    </h3>
-                {% endfor %}
-                </div>
-                <div>
-                    <h3>Total: {{ total }}</h3>
-                    <a href="{% url 'checkout' %}">Checkout</a>
-                </div>
-            {% else %}
-                <p>You do not currently have any items in your cart.</p>
-                <a href="{% url 'browse' %}">Browse More Art</a>
-            {% endif %}
+    {% endif %}
 {% endblock %}

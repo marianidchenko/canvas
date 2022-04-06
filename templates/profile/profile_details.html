@@ -7,7 +7,7 @@
             <!-- Profile widget -->
             <div class="bg-dark shadow rounded overflow-hidden">
                 <div class="px-4 pt-0 pb-4 cover">
-                    <div class="media align-items-end profile-head">
+                    <div class="media align-items-end profile-head" style="background-image: url('{{ profile.shop_banner.url }}');  background-repeat:no-repeat; background-position:center; background-attachment: scroll; padding-left:20px">
                         <div class="profile mr-3">
                             <img src="{{ profile.profile_photo.url }}" alt="..." class="rounded mb-2 thumbnail-profile">
                         <div class="row align-items-end">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 {% if logged_profile == profile %}
-                <div class="bg-dark text-light d-flex justify-content-start text-center mb-4">
+                <div class="bg-dark text-light d-flex justify-content-start text-center mb-4" style="margin-top:20px">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
                             <a href="{% url 'edit profile' pk=profile.pk %}" class="btn btn-outline-light ">Edit profile</a>
@@ -38,6 +38,7 @@
                         <p class="font-italic mb-3">{{ profile.description }}</p>
                     </div>
             </div>
+                {% if products %}
             <div class="px-4 py-3">
                 <h5 class="mb-4">Available items:</h5>
                 <div class="bg-dark text-light d-flex justify-content-start text-center">
@@ -57,6 +58,7 @@
                     </div>
                 </div>
             </div>
+                {% endif %}
         </div>
     </div>
     </span>
