@@ -27,8 +27,7 @@ class CardChoiceField(forms.ModelChoiceField):
 
 class AddressChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
-        country = [c for c in obj.COUNTRIES if obj.country in c][0][1]
-        return f'{country}, {obj.city}, {obj.details}'
+        return f'{obj.get_country_display()}, {obj.city}, {obj.details}'
 
 
 class ChooseCardAndAddress(forms.Form):

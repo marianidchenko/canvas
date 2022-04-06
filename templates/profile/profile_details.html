@@ -24,8 +24,8 @@
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
                             <a href="{% url 'edit profile' pk=profile.pk %}" class="btn btn-outline-light ">Edit profile</a>
-                            <a href="{% url 'manage payments' %}" class="btn btn-outline-light " style="margin-left: 10px">Manage Payment Methods</a>
-                            <a href="{% url 'manage addresses' %}" class="btn btn-outline-light " style="margin-left: 10px">Manage Addresses</a>
+                            <a href="{% url 'manage payments' username %}" class="btn btn-outline-light " style="margin-left: 10px">Manage Payment Methods</a>
+                            <a href="{% url 'manage addresses' username %}" class="btn btn-outline-light " style="margin-left: 10px">Manage Addresses</a>
                         </li>
                     </ul>
                 </div>

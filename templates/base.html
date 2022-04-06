@@ -32,7 +32,7 @@
                     {{ request.user.profile.username }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="background-color:#E0DFE1 ">
-                    <li><a class="dropdown-item" href="{% url 'profile details' user.profile.username %}">Profile
+                    <li><a class="dropdown-item" href="{% url 'profile details' request.user.profile.username %}">Profile
                         Details</a></li>
                     <li>
                         <hr class="dropdown-divider">
