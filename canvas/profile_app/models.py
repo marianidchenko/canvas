@@ -290,6 +290,7 @@ class Profile(models.Model):
     )
 
     shop_banner = models.ImageField(
+        null=True, blank=True,
         upload_to='banner_photos/'
     )
 
