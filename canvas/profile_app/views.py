@@ -34,7 +34,9 @@ class AddPaymentMethodView(LoginRequiredMixin, generic_views.CreateView):
     model = PaymentMethod
     form_class = AddPaymentForm
     template_name = 'profile/payment_add.html'
-    success_url = reverse_lazy('manage payments')
+
+    def get_success_url(self):
+        return reverse_lazy('manage payments', kwargs={'username': self.request.user.profile.username})
 
     # Auto-add the profile relation
     def form_valid(self, form):
@@ -43,7 +45,7 @@ class AddPaymentMethodView(LoginRequiredMixin, generic_views.CreateView):
 
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
-            return redirect('manage payments')
+            return redirect('manage payments', kwargs={'username': self.request.user.profile.username})
         else:
             return super(AddPaymentMethodView, self).post(request, *args, **kwargs)
 
@@ -66,12 +68,13 @@ class EditPaymentView(LoginRequiredMixin, generic_views.UpdateView):
     model = PaymentMethod
     form_class = EditPaymentForm
     template_name = 'profile/payment_edit.html'
-    success_url = reverse_lazy('index')
+
+    def get_success_url(self):
+        return reverse_lazy('manage payments', kwargs={'username': self.request.user.profile.username})
 
     def post(self, request, *args, **kwargs):
-        username = request.user.profile.username
         if "cancel" in request.POST:
-            return redirect('index')
+            return redirect('manage payments',  username=self.request.user.profile.username)
         else:
             return super(EditPaymentView, self).post(request, *args, **kwargs)
 
@@ -80,12 +83,14 @@ class DeletePaymentView(LoginRequiredMixin, generic_views.DeleteView):
     model = PaymentMethod
     form_class = DeletePaymentForm
     template_name = 'profile/payment_delete.html'
-    success_url = reverse_lazy('index')
+
+    def get_success_url(self):
+        return reverse_lazy('manage payments', username=self.request.user.profile.username)
 
     # Create a delete and cancel button
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
-            return redirect('index')
+            return redirect('manage payments', username=self.request.user.profile.username)
         else:
             return super(DeletePaymentView, self).post(request, *args, **kwargs)
 
@@ -94,7 +99,9 @@ class AddAddressView(LoginRequiredMixin, generic_views.CreateView):
     model = Address
     form_class = AddAddressForm
     template_name = 'profile/address_add.html'
-    success_url = reverse_lazy('index')
+
+    def get_success_url(self):
+        return reverse_lazy('manage addresses', kwargs={'username': self.request.user.profile.username})
 
     # Auto-add the profile relation
     def form_valid(self, form):
@@ -119,11 +126,13 @@ class EditAddressView(LoginRequiredMixin, generic_views.UpdateView):
     model = Address
     form_class = EditAddressForm
     template_name = 'profile/address_edit.html'
-    success_url = reverse_lazy('index')
+
+    def get_success_url(self):
+        return reverse_lazy('manage addresses', kwargs={'username': self.request.user.profile.username})
 
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
-            return redirect('index')
+            return redirect('manage addresses', username=self.request.user.profile.username)
         else:
             return super(EditAddressView, self).post(request, *args, **kwargs)
 
@@ -132,11 +141,13 @@ class DeleteAddressView(LoginRequiredMixin, generic_views.DeleteView):
     model = Address
     form_class = DeleteAddressForm
     template_name = 'profile/address_delete.html'
-    success_url = reverse_lazy('manage addresses')
+
+    def get_success_url(self):
+        return reverse_lazy('manage addresses', kwargs={'username': self.request.user.profile.username})
 
     # Create a delete and cancel button
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
-            return redirect('index')
+            return redirect('manage addresses', username=self.request.user.profile.username)
         else:
             return super(DeleteAddressView, self).post(request, *args, **kwargs)
