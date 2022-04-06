@@ -6,17 +6,17 @@
         {% if products %}
         {% for product in products %}
             <div class="p-3 bd-highlight">
-                    <div class="card" style="width: 18rem; border-color:black">
+                    <div class="card" style="width: 19rem; border-color:black">
                         <img src="{{ product.product_photo.url }}" class="card-img-top thumbnail-browse" alt="...">
                         <div class="card-body" style="background-color:#262528;">
                             <h5 class="card-title">{{ product.product_name }}</h5>
                             <p class="card-text">{{ product.product_description|truncatesmart:30 }}</p>
                             <p class="card-text">${{ product.product_price }}</p>
-                            <a href="{% url 'edit product' pk=product.pk %}" class="btn btn-secondary">Edit</a>
+                            <a href="{% url 'edit product' pk=product.pk %}" class="button-6">Edit</a>
                             {% if product.product_quantity <= 0 %}
-                                <a href="{% url 'restock product' pk=product.pk %}" class="btn btn-secondary">Restock</a>
+                                <a href="{% url 'restock product' pk=product.pk %}" class="button-6">Restock</a>
                             {% endif %}
-                            <a href="{% url 'delete product' pk=product.pk %}" class="btn btn-secondary">Delete</a>
+                            <a href="{% url 'delete product' pk=product.pk %}" class="button-6">Delete</a>
                         </div>
                     </div>
                 </div>

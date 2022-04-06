@@ -4,21 +4,20 @@ from django.urls import reverse_lazy
 from django.views import generic as generic_views
 from canvas.profile_app.forms import AddPaymentForm, EditPaymentForm, DeletePaymentForm, AddAddressForm, \
     EditAddressForm, DeleteAddressForm, EditProfileForm
-from canvas.profile_app.helpers import get_payment_methods
+from canvas.profile_app.helpers import get_payment_methods, get_profile_by_username, get_products_by_profile_username
 from canvas.profile_app.models import PaymentMethod, Address, Profile
 
 
-class ProfileDetailsView(LoginRequiredMixin, generic_views.TemplateView):
+class ProfileDetailsView(generic_views.TemplateView):
     model = Profile
     template_name = 'profile/profile_details.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Welcome to Canvas'
         context['user'] = self.request.user
-        context['profile'] = self.request.user.profile
-        payment_methods = get_payment_methods(self.request.user.pk)
-        context['payment_methods'] = payment_methods
+        context['logged_profile'] = self.request.user.profile
+        context['profile'] = get_profile_by_username(kwargs['username'])
+        context['products'] = get_products_by_profile_username(kwargs['username'])
         return context
 
 

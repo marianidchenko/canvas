@@ -8,15 +8,15 @@
             <div class="position-absolute top-50 start-50 translate-middle d-grid gap-3">
                 <h1 style="font-size:45px">Hello, {{ user.profile.username }}!</h1>
                 <div class="mx-auto d-col gap-5" style="align-content:center; justify-content: center;">
-                    <a href="{% url 'browse' %}" class="btn btn-dark" style="font-size:25px">Browse</a>
+                    <a href="{% url 'browse' %}" class="button-7" style="font-size:25px">Browse</a>
                 </div>
             </div>
     {% else %}
             <div class="position-absolute top-50 start-50 translate-middle d-grid gap-3">
                 <h1 style="font-size:55px">Welcome to Canvas!</h1>
                 <div class="mx-auto d-col gap-5" style="align-content:center; justify-content: center;">
-                    <a href="{% url 'register user' %}" class="btn btn-dark" style="margin-right: 30px; font-size:24px">Register</a>
-                    <a href="{% url 'login user' %}" class="btn btn-dark" style="font-size:24px">Login</a>
+                    <a href="{% url 'register user' %}" class="button-7" style="margin-right: 30px; font-size:24px">Register</a>
+                    <a href="{% url 'login user' %}" class="button-7" style="font-size:24px">Login</a>
                 </div>
             </div>
         </span>

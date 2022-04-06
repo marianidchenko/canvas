@@ -12,17 +12,15 @@
             <p class="card-text">{{ product.product_description }}</p>
               <p class="card-text">Current amount available: {{ product.product_quantity }}</p>
             <p class="card-text"><small class="text-white">${{ product.product_price }}</small></p>
-              <a href="{% url 'add to cart' pk=product.pk %}" class="btn btn-secondary">Add to cart</a>
-
+              <a href="{% url 'add to cart' pk=product.pk %}" class="button-6">Add to cart</a>
           </div>
         </div>
-          <div class="col-md-3 p-4">
-          <div class="p-2 bd-highlight">
+          <div class="col-md-3 p-4 ">
+                <div class="p-2 bd-highlight">
                     <img src="{{ product.profile.profile_photo.url }}" class="thumbnail-profile mx-auto d-block rounded-start">
                 </div>
-                <div class="p-2 bd-highlight mx-auto d-block">
-                    Artist:
-                    <a href="#" style="color:white">{{ product.profile.username }}</a>
+                <div class="p-3 bd-highlight mx-auto d-block">
+                    <a href="{% url 'profile details' product.profile.username %}" class="button-7 position-relative top-50 start-50 translate-middle" style="width:160px">Artist: @{{ product.profile.username }}</a>
                 </div>
         </div>
       </div>

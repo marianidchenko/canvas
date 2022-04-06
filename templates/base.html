@@ -20,6 +20,9 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'browse' %}">Browse</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'cart' %}">Cart</a>
+        </li>
         {% if user.is_authenticated %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -28,21 +31,21 @@
                          style="border-radius:50%; position:relative">
                     {{ request.user.profile.username }}
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="background-color:#D0CFD2">
-                    <li><a class="dropdown-item" href="{% url 'profile details' %}">Profile
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="background-color:#E0DFE1 ">
+                    <li><a class="dropdown-item" href="{% url 'profile details' user.profile.username %}">Profile
                         Details</a></li>
-
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" href="{% url 'manage products' %}">Manage Products</a></li>
                     <li><a class="dropdown-item" href="{% url 'add product' %}">Add Product</a></li>
-                    <li><a class="dropdown-item" href="{% url 'cart' %}">My Cart</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="{% url 'logout user' %}">Logout</a>
                     </li>
                 </ul>
             </li>
-
         {% else %}
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'login user' %}">Login</a>
@@ -51,6 +54,9 @@
                 <a class="nav-link" href="{% url 'register user' %}">Register</a>
             </li>
         {% endif %}
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+        </li>
     </ul>
     <a href=""></a>
 </nav>
