@@ -7,6 +7,7 @@ from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress, ProductEd
     ProductDeleteForm
 from canvas.main.helpers import get_available_payment_methods, get_available_addresses, get_cart_items, get_total_price
 from canvas.main.models import Product, CartItem
+from canvas.profile_app.helpers import get_profile_by_username
 
 
 class IndexView(generic_views.TemplateView):
@@ -24,6 +25,17 @@ class AllProductsView(generic_views.ListView):
     template_name = 'browse.html'
     context_object_name = 'products'
     paginate_by = 8
+
+
+class ProfileProductViews(generic_views.ListView):
+    model = Product
+    template_name = 'browse.html'
+    context_object_name = 'products'
+    paginate_by = 8
+
+    def get_queryset(self):
+        profile = get_profile_by_username(self.kwargs['username'])
+        return self.model.objects.filter(profile=profile)
 
 
 class ProductDetailView(generic_views.DetailView):

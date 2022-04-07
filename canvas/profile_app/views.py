@@ -3,22 +3,29 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
+
+from canvas.main.models import Product
 from canvas.profile_app.forms import AddPaymentForm, EditPaymentForm, DeletePaymentForm, AddAddressForm, \
     EditAddressForm, DeleteAddressForm, EditProfileForm, EditBannerForm
 from canvas.profile_app.helpers import get_profile_by_username, get_products_by_profile_username
 from canvas.profile_app.models import PaymentMethod, Address, Profile
 
 
-class ProfileDetailsView(generic_views.TemplateView):
-    model = Profile
+class ProfileDetailsView(generic_views.ListView):
+    model = Product
+    context_object_name = 'products'
+    paginate_by = 3
     template_name = 'profile/profile_details.html'
+
+    def get_queryset(self):
+        profile = get_profile_by_username(self.kwargs['username'])
+        return self.model.objects.filter(profile=profile)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         context['logged_profile'] = self.request.user.profile
-        context['profile'] = get_profile_by_username(kwargs['username'])
-        context['products'] = get_products_by_profile_username(kwargs['username'])
+        context['profile'] = get_profile_by_username(self.kwargs['username'])
         return context
 
 
