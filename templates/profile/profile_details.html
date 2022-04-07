@@ -18,15 +18,18 @@
                         <div class="row align-items-end">
                             <div class="media-body col-3 mb-2 text-white">
                                 <h4 class="mt-0 mb-0">@{{ profile.username }}</h4>
+                                {% if user.profile == profile %}
                                 <a href="{% url 'edit banner' pk=profile.pk %}" class="btn btn-outline-light "
                                    style="font-size: 12px; margin-top: 10px">Edit banner</a>
+                                {% endif %}
                             </div>
                             <div class="media-body col-2 mb-2 text-white">
                             </div>
                         </div>
                     </div>
                     </div>
-                    {% if logged_profile == profile %}
+                    {% if user.is_authenticated %}
+                    {% if user.profile == profile %}
                         <div class="bg-dark text-light d-flex justify-content-start text-center mb-4"
                              style="margin-top:20px">
                             <ul class="list-inline mb-0">
@@ -41,6 +44,7 @@
                                 </li>
                             </ul>
                         </div>
+                    {% endif %}
                     {% endif %}
                     <div class="px-4 py-3">
                         {% if profile.country or profile.description %}

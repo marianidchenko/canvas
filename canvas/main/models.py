@@ -47,6 +47,10 @@ class Product(models.Model):
         Profile, on_delete=models.CASCADE,
     )
 
+    created_on = models.DateTimeField(
+        auto_now_add=True,
+    )
+
 
 class CartItem(models.Model):
     quantity = models.IntegerField(default=0)

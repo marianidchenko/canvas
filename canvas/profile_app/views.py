@@ -24,7 +24,6 @@ class ProfileDetailsView(generic_views.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
-        context['logged_profile'] = self.request.user.profile
         context['profile'] = get_profile_by_username(self.kwargs['username'])
         return context
 
@@ -87,6 +86,7 @@ class EditPaymentView(LoginRequiredMixin, generic_views.UpdateView):
     template_name = 'profile/payment_edit.html'
 
     def get_success_url(self):
+
         return reverse_lazy('manage payments', kwargs={'username': self.request.user.profile.username})
 
     def post(self, request, *args, **kwargs):

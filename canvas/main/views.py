@@ -24,7 +24,8 @@ class AllProductsView(generic_views.ListView):
     model = Product
     template_name = 'browse.html'
     context_object_name = 'products'
-    paginate_by = 8
+    paginate_by = 9
+    ordering = ['-created_on']
 
 
 class ProfileProductViews(generic_views.ListView):
@@ -78,8 +79,15 @@ class CartView(generic_views.ListView, LoginRequiredMixin):
         return self.model.objects.filter(profile=self.request.user.profile)
 
 
-class CheckoutView(generic_views.TemplateView, LoginRequiredMixin):
+class CheckoutView(generic_views.FormView, LoginRequiredMixin):
     template_name = 'checkout.html'
+    form_class = ChooseCardAndAddress
+    success_url = reverse_lazy('purchased')
+
+    def get_form_kwargs(self):
+        kwargs = super(CheckoutView, self).get_form_kwargs()
+        kwargs['profile'] = self.request.user.profile
+        return kwargs
 
     def get_context_data(self, **kwargs):
         current_profile = self.request.user.profile
@@ -88,7 +96,6 @@ class CheckoutView(generic_views.TemplateView, LoginRequiredMixin):
         context['total'] = get_total_price(current_profile)
         context['cards'] = get_available_payment_methods(current_profile)
         context['addresses'] = get_available_addresses(current_profile)
-        context['form'] = ChooseCardAndAddress
         return context
 
     def post(self, request, *args, **kwargs):
@@ -127,7 +134,7 @@ class ManageProductsView(generic_views.ListView, LoginRequiredMixin):
     context_object_name = 'products'
 
     def get_queryset(self):
-        return self.model.objects.filter(profile=self.request.user.profile)
+        return self.model.objects.filter(profile=self.request.user.profile).order_by('product_quantity')
 
 
 class EditProductView(generic_views.UpdateView):

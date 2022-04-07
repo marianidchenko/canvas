@@ -40,7 +40,7 @@ class EditPaymentForm(forms.ModelForm):
         model = PaymentMethod
         fields = ('card_expiry',)
         labels = {
-            'card_expiry': 'Enter the new expiration date:',
+            'card_expiry': 'Enter the new expiration date',
         }
 
 

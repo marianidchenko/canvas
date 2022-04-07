@@ -1,3 +1,4 @@
+import self
 from django import forms
 from canvas.main.models import Product
 from canvas.profile_app.models import PaymentMethod, Address
@@ -30,10 +31,17 @@ class AddressChoiceField(forms.ModelChoiceField):
         return f'{obj.get_country_display()}, {obj.city}, {obj.details}'
 
 
+class Card:
+    pass
+
+
 class ChooseCardAndAddress(forms.Form):
-    card = CardChoiceField(
-        queryset=PaymentMethod.objects.all()
-    )
+    def __init__(self, profile, *args, **kwargs):
+        super(ChooseCardAndAddress, self).__init__(*args, **kwargs)
+        self.fields['card'].queryset = PaymentMethod.objects.filter(profile=profile.pk)
+        self.fields['address'].queryset = Address.objects.filter(profile=profile.pk)
+
+    card = CardChoiceField(queryset=None)
     address = AddressChoiceField(queryset=Address.objects.all())
 
 
