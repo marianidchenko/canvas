@@ -16,6 +16,14 @@ class EditProfileForm(forms.ModelForm):
         }
 
 
+class EditBannerForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = (
+            'shop_banner',
+        )
+
+
 class AddPaymentForm(forms.ModelForm):
     class Meta:
         model = PaymentMethod

@@ -6,4 +6,4 @@ from canvas.auth_app.models import CanvasUser
 
 @admin.register(CanvasUser)
 class CanvasUser(admin.ModelAdmin):
-    pass
+    list_display = ('email', 'is_superuser', 'is_staff',)

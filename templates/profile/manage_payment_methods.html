@@ -3,6 +3,9 @@
 {% block page_content %}
     {% load custom_tags %}
     <span class="d-block p-2 text-white" style="; margin:30px">
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'add payment' %}" class='button-7'>Add a payment method</a>
+    </div>
     <div class="d-flex flex-wrap justify-content-center">
         {% for payment_method in payment_methods %}
                 <div class="p-3 bd-highlight">

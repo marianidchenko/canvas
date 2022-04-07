@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 from canvas.profile_app.forms import AddPaymentForm, EditPaymentForm, DeletePaymentForm, AddAddressForm, \
-    EditAddressForm, DeleteAddressForm, EditProfileForm
+    EditAddressForm, DeleteAddressForm, EditProfileForm, EditBannerForm
 from canvas.profile_app.helpers import get_profile_by_username, get_products_by_profile_username
 from canvas.profile_app.models import PaymentMethod, Address, Profile
 
@@ -26,6 +26,15 @@ class EditProfileView(generic_views.UpdateView, LoginRequiredMixin):
     model = Profile
     template_name = 'profile/profile_edit.html'
     form_class = EditProfileForm
+
+    def get_success_url(self):
+        return reverse_lazy('profile details', kwargs={'username': self.request.user.profile.username})
+
+
+class EditBannerView(generic_views.UpdateView, LoginRequiredMixin):
+    model = Profile
+    template_name = 'profile/profile_edit.html'
+    form_class = EditBannerForm
 
     def get_success_url(self):
         return reverse_lazy('profile details', kwargs={'username': self.request.user.profile.username})

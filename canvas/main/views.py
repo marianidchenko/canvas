@@ -23,7 +23,7 @@ class AllProductsView(generic_views.ListView):
     model = Product
     template_name = 'browse.html'
     context_object_name = 'products'
-    paginate_by = 10
+    paginate_by = 8
 
 
 class ProductDetailView(generic_views.DetailView):

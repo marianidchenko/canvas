@@ -269,7 +269,7 @@ class Profile(models.Model):
     )
 
     profile_photo = models.ImageField(
-        upload_to='profile_photos/'
+        upload_to='profile_photos/',
     )
 
     user = models.OneToOneField(
@@ -319,7 +319,8 @@ class Address(models.Model):
 
 
 class PaymentMethod(models.Model):
-    TYPE_MAX_LENGTH =30
+    TYPE_MAX_LENGTH=30
+
     def __str__(self):
         return f"**** **** **** {self.card_number[-4:]}"
 

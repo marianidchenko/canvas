@@ -1,11 +1,12 @@
 from django.urls import path
 from canvas.profile_app.views import AddPaymentMethodView, ProfileDetailsView, EditPaymentView, \
     ManagePaymentMethodsView, DeletePaymentView, AddAddressView, ManageAddressesView, EditAddressView, \
-    DeleteAddressView, EditProfileView
+    DeleteAddressView, EditProfileView, EditBannerView
 
 urlpatterns = (
     path('<str:username>/', ProfileDetailsView.as_view(), name='profile details'),
     path('edit/<int:pk>/', EditProfileView.as_view(), name='edit profile'),
+    path('edit/banner/<int:pk>', EditBannerView.as_view(), name='edit banner'),
 
     path('manage_payments/<str:username>/', ManagePaymentMethodsView.as_view(), name='manage payments'),
     path('payment/add/', AddPaymentMethodView.as_view(), name='add payment'),
