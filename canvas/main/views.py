@@ -24,8 +24,12 @@ class AllProductsView(generic_views.ListView):
     model = Product
     template_name = 'browse.html'
     context_object_name = 'products'
-    paginate_by = 9
-    ordering = ['-created_on']
+
+    def get_queryset(self):
+        products = Product.objects.exclude(product_quantity=0).order_by('-created_on', 'product_name')
+        return products
+
+    paginate_by = 8
 
 
 class ProfileProductViews(generic_views.ListView):
@@ -142,6 +146,8 @@ class EditProductView(generic_views.UpdateView):
     template_name = 'product_edit.html'
     form_class = ProductEditForm
     success_url = reverse_lazy('manage products')
+
+
 
 
 class RestockProductView(generic_views.UpdateView):
