@@ -86,6 +86,9 @@ DATABASES = {
         'PASSWORD': '1123QwER',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'TEST': {
+                    'NAME': 'canvas_testing_db',
+        }
     },
 }
 

@@ -58,12 +58,6 @@ class CreateProductView(generic_views.CreateView, LoginRequiredMixin):
         form.instance.profile = self.request.user.profile
         return super(CreateProductView, self).form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        if "cancel" in request.POST:
-            return redirect('browse')
-        else:
-            return super(CreateProductView, self).post(request, *args, **kwargs)
-
 
 class CartView(generic_views.ListView, LoginRequiredMixin):
     model = CartItem
