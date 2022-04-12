@@ -28,7 +28,7 @@ class ProfileDetailsView(generic_views.ListView):
         return context
 
 
-class EditProfileView(generic_views.UpdateView, LoginRequiredMixin):
+class EditProfileView(LoginRequiredMixin, generic_views.UpdateView):
     model = Profile
     template_name = 'profile/profile_edit.html'
     form_class = EditProfileForm

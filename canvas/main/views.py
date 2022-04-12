@@ -48,7 +48,7 @@ class ProductDetailView(generic_views.DetailView):
     template_name = 'product_details.html'
 
 
-class CreateProductView(generic_views.CreateView, LoginRequiredMixin):
+class CreateProductView(LoginRequiredMixin, generic_views.CreateView):
     model = Product
     template_name = 'product_create.html'
     form_class = CreateProductFrom
@@ -59,7 +59,7 @@ class CreateProductView(generic_views.CreateView, LoginRequiredMixin):
         return super(CreateProductView, self).form_valid(form)
 
 
-class CartView(generic_views.ListView, LoginRequiredMixin):
+class CartView(LoginRequiredMixin, generic_views.ListView):
     model = CartItem
     template_name = 'cart.html'
     context_object_name = 'cartitems'
@@ -77,7 +77,7 @@ class CartView(generic_views.ListView, LoginRequiredMixin):
         return self.model.objects.filter(profile=self.request.user.profile)
 
 
-class CheckoutView(generic_views.FormView, LoginRequiredMixin):
+class CheckoutView(LoginRequiredMixin, generic_views.FormView):
     template_name = 'checkout.html'
     form_class = ChooseCardAndAddress
     success_url = reverse_lazy('purchased')
@@ -104,7 +104,7 @@ class CheckoutView(generic_views.FormView, LoginRequiredMixin):
             return redirect('purchased')
 
 
-class PurchasedView(generic_views.TemplateView, LoginRequiredMixin):
+class PurchasedView(LoginRequiredMixin, generic_views.TemplateView):
     template_name = 'purchased.html'
 
 
@@ -126,7 +126,7 @@ def add_to_cart_view(request, pk):
     return redirect('browse')
 
 
-class ManageProductsView(generic_views.ListView, LoginRequiredMixin):
+class ManageProductsView(LoginRequiredMixin, generic_views.ListView):
     model = Product
     template_name = 'product_manage.html'
     context_object_name = 'products'
@@ -135,16 +135,14 @@ class ManageProductsView(generic_views.ListView, LoginRequiredMixin):
         return self.model.objects.filter(profile=self.request.user.profile).order_by('product_quantity')
 
 
-class EditProductView(generic_views.UpdateView):
+class EditProductView(LoginRequiredMixin, generic_views.UpdateView):
     model = Product
     template_name = 'product_edit.html'
     form_class = ProductEditForm
     success_url = reverse_lazy('manage products')
 
 
-
-
-class RestockProductView(generic_views.UpdateView):
+class RestockProductView(LoginRequiredMixin, generic_views.UpdateView):
     model = Product
     template_name = 'product_restock.html'
     form_class = ProductRestockForm
