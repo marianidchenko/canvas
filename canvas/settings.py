@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'canvas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'canvas_db',
-        'USER': 'postgres',
-        'PASSWORD': '1123QwER',
-        'HOST': '127.0.0.1',
+        'NAME': 'da233bf1qnosm3',
+        'USER': 'jolitxisgllonr',
+        'PASSWORD': '8aa7ee1bb90fb6a90b0ff49070983e3a5330f219da831a5e2f2ec465fa4f81c2',
+        'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
         'TEST': {
             'NAME': 'canvas_testing_db',
