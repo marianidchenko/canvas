@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <div class="d-flex align-items-center justify-content-center" style="height: 88vh;">
+        <form method="post" enctype='multipart/form-data' style="justify-content:center;">
+            {% csrf_token %}
+            <div class="p-3 bd-highlight d-grid text-white gap-1 row justify-content-center align-items-center">
+                <h1 style="font-size:30px">Are you sure you want to remove this item?</h1>
+            </div>
+            <div class="p-3 bd-highlight d-grid gap-1 row justify-content-center align-items-center">
+                <div class="input-group">
+                    <input type="submit" formnovalidate class="button-7" style="margin-top:10px; width:120px" name="cancel"
+                           value="Cancel">
+                    <span class="input-group-btn" style="width:15px;"></span>
+                    <input type="submit" class="button-7" style="margin-top:10px; width:120px" name="remove"
+                           value="Remove">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

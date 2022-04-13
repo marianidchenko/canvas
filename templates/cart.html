@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
 {% block page_content %}
-    <div class="container bg-dark text-light rounded-top" style="margin-top:45px">
+    <div class="container bg-dark text-light rounded-top" style="margin-top:45px; min-height:78vh">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-10 col-12 pt-2">
                 <div class="d-flex" >
@@ -38,7 +38,7 @@
                                 class="fa fa-plus-square text-secondary"></span></div>
                         <div class="pl-md-0 pl-2">
                             <b>${{ cartitem.quantity|multiply:cartitem.product.product_price }}</b></div>
-                        <div class="close">&times;</div>
+                        <div class="close"><a href="{% url 'remove cartitem' pk=cartitem.pk %}" class="btn btn-outline-light btn-sm">x</a></div>
                     </div>
                 {% endfor %}
             </div>

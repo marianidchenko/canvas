@@ -77,6 +77,22 @@ class CartView(LoginRequiredMixin, generic_views.ListView):
         return self.model.objects.filter(profile=self.request.user.profile)
 
 
+class RemoveCartItemView(LoginRequiredMixin, generic_views.DeleteView):
+    model = CartItem
+    template_name = 'cart_item_remove.html'
+    success_url = reverse_lazy('cart')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect('cart')
+        else:
+            item = self.get_object()
+            item.product.product_quantity += item.quantity
+            item.product.save()
+            item.delete()
+            return redirect('cart')
+
+
 class CheckoutView(LoginRequiredMixin, generic_views.FormView):
     template_name = 'checkout.html'
     form_class = ChooseCardAndAddress
