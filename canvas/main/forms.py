@@ -58,7 +58,6 @@ class ProductEditForm(forms.ModelForm):
         )
         widgets = {
             'product_description': forms.Textarea(attrs={'rows': 3}),
-            'product_photo': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
 
