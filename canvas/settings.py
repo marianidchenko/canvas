@@ -7,20 +7,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-#q1e)dw5%o9vaz2%6jyd6lhjmplqwd3towk1=c67*rw(%ky+=y'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-
-CLOUDINARY_URL = "cloudinary://368366934282259:d7M_Ji3dejYAHV_U3ZPVK8885A0@hjz5y3fhi"
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -80,10 +71,10 @@ if APP_ENVIRONMENT == 'Production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'da233bf1qnosm3',
-            'USER': 'jolitxisgllonr',
-            'PASSWORD': '8aa7ee1bb90fb6a90b0ff49070983e3a5330f219da831a5e2f2ec465fa4f81c2',
-            'HOST': 'ec2-52-48-159-67.eu-west-1.compute.amazonaws.com',
+            'NAME': os.getenv("DB_NAME"),
+            'USER': os.getenv("DB_USER"),
+            'PASSWORD': os.getenv("DB_PASSWORD"),
+            'HOST': os.getenv("DB_HOST"),
             'PORT': '5432',
             'TEST': {
                 'NAME': 'canvas_testing_db',
@@ -109,10 +100,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'canvas_db',
-            'USER': 'postgres',
-            'PASSWORD': '1123QwER',
-            'HOST': '127.0.0.1',
+            'NAME': os.getenv("DB_NAME"),
+            'USER': os.getenv("DB_USER"),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv("DB_HOST"),
             'PORT': '5432',
             'TEST': {
                 'NAME': 'canvas_testing_db',
