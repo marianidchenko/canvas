@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
 {% block page_content %}
-    <span class="d-block p-2 text-white" style="; margin:30px; background-color:#353438">
-    <div class="row py-5 px-1">
+    <div class="row py-5 px-1 text-light">
         <div class="col-md-9 mx-auto">
-            <!-- Profile widget -->
             <div class="bg-dark shadow rounded overflow-hidden">
                 <div class="px-4 pt-0 pb-4 cover">
                     {% if profile.shop_banner %}
@@ -19,8 +17,8 @@
                             <div class="media-body col-3 mb-2 text-white">
                                 <h4 class="mt-0 mb-0">@{{ profile.username }}</h4>
                                 {% if user.profile == profile %}
-                                <a href="{% url 'edit banner' pk=profile.pk %}" class="btn btn-outline-light "
-                                   style="font-size: 12px; margin-top: 10px">Edit banner</a>
+                                    <a href="{% url 'edit banner' pk=profile.pk %}" class="btn btn-outline-light "
+                                       style="font-size: 12px; margin-top: 10px">Edit banner</a>
                                 {% endif %}
                             </div>
                             <div class="media-body col-2 mb-2 text-white">
@@ -29,22 +27,22 @@
                     </div>
                     </div>
                     {% if user.is_authenticated %}
-                    {% if user.profile == profile %}
-                        <div class="bg-dark text-light d-flex justify-content-start text-center mb-4"
-                             style="margin-top:20px">
-                            <ul class="list-inline mb-0">
-                                <li class="list-inline-item">
-                                    <a href="{% url 'edit profile' pk=profile.pk %}" class="btn btn-outline-light ">Edit
-                                        profile</a>
-                                    <a href="{% url 'manage payments' profile.username %}"
-                                       class="btn btn-outline-light " style="margin-left: 10px">Manage Payment
-                                        Methods</a>
-                                    <a href="{% url 'manage addresses' profile.username %}"
-                                       class="btn btn-outline-light " style="margin-left: 10px">Manage Addresses</a>
-                                </li>
-                            </ul>
-                        </div>
-                    {% endif %}
+                        {% if user.profile == profile %}
+                            <div class="bg-dark text-light d-flex justify-content-start text-center mb-4"
+                                 style="margin-top:20px">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a href="{% url 'edit profile' pk=profile.pk %}" class="btn btn-outline-light ">Edit
+                                            profile</a>
+                                        <a href="{% url 'manage payments' profile.username %}"
+                                           class="btn btn-outline-light " style="margin-left: 10px">Manage Payment
+                                            Methods</a>
+                                        <a href="{% url 'manage addresses' profile.username %}"
+                                           class="btn btn-outline-light " style="margin-left: 10px">Manage Addresses</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endif %}
                     {% endif %}
                     <div class="px-4 py-3">
                         {% if profile.country or profile.description %}
@@ -65,10 +63,10 @@
                                 {% for product in products %}
                                     {% if product.product_quantity > 0 %}
                                         <div class="p-3 bd-highlight">
-                                            <div class="card" style="width: 18rem; border-color:black">
+                                            <div class="card" style="width: 18rem; border-color:#252422;">
                                                 <img src="{{ product.product_photo.url }}"
                                                      class="card-img-top thumbnail-profile-item" alt="...">
-                                                <div class="card-body" style="background-color:#262528;">
+                                                <div class="card-body" style="background-color:#181B1E;">
                                                     <h5 class="card-title">{{ product.product_name }}</h5>
                                                     <a href="{% url 'details' pk=product.pk %}" class="button-7">Check
                                                         it out here</a>
@@ -78,8 +76,8 @@
                                     {% endif %}
                                 {% endfor %}
                                 {% if is_paginated %}
-                                <a href="{% url 'profile products' profile.username %}" class="button-7"
-                                   style="margin-left: 10px">See All Items</a>
+                                    <a href="{% url 'profile products' profile.username %}" class="button-7"
+                                       style="margin-left: 10px">See All Items</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -87,5 +85,4 @@
                     {% endif %}
                 </div>
             </div>
-    </span>
 {% endblock %}

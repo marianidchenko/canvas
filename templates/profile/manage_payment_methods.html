@@ -2,24 +2,27 @@
 {% load static %}
 {% block page_content %}
     {% load custom_tags %}
-    <span class="d-block p-2 text-white" style="; margin:30px">
-    <div class="d-flex justify-content-end">
-        <a href="{% url 'add payment' %}" class='button-7'>Add a payment method</a>
-    </div>
-    <div class="d-flex flex-wrap justify-content-center">
-        {% for payment_method in payment_methods %}
-                <div class="p-3 bd-highlight">
-                    <div class="card" style="width: 18rem; border-color:black">
-                        <img src="{% static 'images/preview.png' %}" class="card-img-top" alt="...">
-                        <div class="card-body" style="background-color:#353438;">
-                            <h5 class="card-title">{{ payment_method.card_number|slice:4}} **** **** ****</h5>
-                            <p class="card-text">EXP: {{ payment_method.card_expiry }} {{ payment_method.type }}</p>
-                            <a href="{% url 'edit payment' pk=payment_method.pk %}" class="button-6">Update Expiry</a>
-                            <a href="{% url 'delete payment' pk=payment_method.pk %}" class="button-6">Remove</a>
+    <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+        <div class="d-flex main-div flex-wrap justify-content-start text-start" style="min-height: 80vh;">
+            <div class="d-flex flex-wrap justify-content-center text-light">
+                {% for payment_method in payment_methods %}
+                    <div class="p-3 bd-highlight">
+                        <div class="card" style="width: 18rem; border-color:#252422;">
+                            <img src="{% static 'images/preview.png' %}" class="card-img-top" alt="...">
+                            <div class="card-body" style="background-color:#181B1E;">
+                                <h5 class="card-title">{{ payment_method.card_number|slice:4 }} **** **** ****</h5>
+                                <p class="card-text">EXP: {{ payment_method.card_expiry }} {{ payment_method.type }}</p>
+                                <a href="{% url 'edit payment' pk=payment_method.pk %}" class="button-6">Update
+                                    Expiry</a>
+                                <a href="{% url 'delete payment' pk=payment_method.pk %}" class="button-6">Remove</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-        {% endfor %}
+                {% endfor %}
+            </div>
+        <div class="ms-auto p-3 bd-highligt">
+                <a href="{% url 'add payment' %}" class='button-7' style="margin-right:50px">Add a payment method</a>
+        </div>
+        </div>
     </div>
-    </span>
 {% endblock %}

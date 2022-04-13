@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block page_content %}
-    <body>
-        <span class="d-block p-2 bg-dark text-white" style="height:90vh; background-image:url('{% static 'images/splatter.png' %}'); background-repeat:no-repeat; background-position:center; background-attachment: scroll">
-            <div class="d-flex flex-column position-absolute top-50 start-50 translate-middle d-grid gap-3 align-items-center">
-                <div class="p-1">
-                    <h1 style="font-size:45px">Error 404</h1>
-                </div>
-                <div class="p-1">
-                    <h3 style="font-size:35px">Oops, looks like the page does not exist.</h3>
-                </div>
-            </div>
-    </body>
+    <span class="d-block p-2 bg-dark text-white"
+          style="height:90vh; background-image:url('{% static 'images/splatter.png' %}'); background-repeat:no-repeat; background-position:center; background-attachment: scroll">
+    <div class="d-flex flex-column position-absolute top-50 start-50 translate-middle d-grid gap-3 align-items-center">
+        <div class="p-1">
+            <h1 style="font-size:45px">Error 404</h1>
+        </div>
+        <div class="p-1">
+            <h3 style="font-size:35px">Oops, looks like the page does not exist.</h3>
+        </div>
+    </div>
+    </span>
 {% endblock %}

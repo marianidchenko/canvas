@@ -7,11 +7,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT')
 
-SECRET_KEY = 'django-insecure-#q1e)dw5%o9vaz2%6jyd6lhjmplqwd3towk1=c67*rw(%ky+=y'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost 127.0.0.1').split(' ')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,7 +26,10 @@ INSTALLED_APPS = [
     'canvas.profile_app',
 
     'cloudinary',
+    'crispy_forms'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -100,10 +103,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv("DB_NAME"),
-            'USER': os.getenv("DB_USER"),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv("DB_HOST"),
+            'NAME': os.getenv("DB_NAME", "canvas_db"),
+            'USER': os.getenv("DB_USER", "postgres"),
+            'PASSWORD': os.getenv('DB_PASSWORD', "1123QwER"),
+            'HOST': os.getenv("DB_HOST", "127.0.0.1"),
             'PORT': '5432',
             'TEST': {
                 'NAME': 'canvas_testing_db',
@@ -132,6 +135,24 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            # DEBUG, WARNING, INFO, ERROR, CRITICAL,
+            'level': os.getenv("LOGGING_LEVEL"),
+            'filters': [],
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': os.getenv("LOGGING_LEVEL"),
+            'handlers': ['console'],
+        }
+    }
+}
 
 AUTH_USER_MODEL = 'auth_app.CanvasUser'
 
