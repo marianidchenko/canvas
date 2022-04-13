@@ -1,3 +1,4 @@
+from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
 
@@ -11,7 +12,7 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
         max_length=25
     )
 
-    profile_photo = forms.ImageField()
+    profile_photo = CloudinaryFileField()
 
     class Meta:
         model = UserModel

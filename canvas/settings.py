@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import cloudinary
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -12,7 +14,6 @@ SECRET_KEY = 'django-insecure-#q1e)dw5%o9vaz2%6jyd6lhjmplqwd3towk1=c67*rw(%ky+=y
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-print(DEBUG)
 
 
 ALLOWED_HOSTS = [
@@ -33,7 +34,9 @@ INSTALLED_APPS = [
 
     'canvas.auth_app',
     'canvas.main',
-    'canvas.profile_app'
+    'canvas.profile_app',
+    
+    'cloudinary',
 ]
 
 MIDDLEWARE = [

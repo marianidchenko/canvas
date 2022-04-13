@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from creditcards.models import CardNumberField, CardExpiryField, SecurityCodeField
 from django.db import models
 
@@ -268,9 +269,7 @@ class Profile(models.Model):
         null=False,
     )
 
-    profile_photo = models.ImageField(
-        upload_to='profile_photos/',
-    )
+    profile_photo = CloudinaryField()
 
     user = models.OneToOneField(
         CanvasUser,
@@ -289,9 +288,8 @@ class Profile(models.Model):
         choices=COUNTRIES,
     )
 
-    shop_banner = models.ImageField(
+    shop_banner = CloudinaryField(
         null=True, blank=True,
-        upload_to='banner_photos/'
     )
 
 
