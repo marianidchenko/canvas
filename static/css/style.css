@@ -138,3 +138,19 @@
 .rcorners {
   border-radius: 25px;
 }
+
+.asteriskField {
+    display: none;
+}
+
+label {
+    margin-bottom:15px;
+}
+
+.main-div {
+    width:89vw;
+    margin:30px;
+    background-color: #212529;
+    padding: 5px;
+}
+

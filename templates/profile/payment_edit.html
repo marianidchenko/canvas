@@ -1,30 +1,15 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
 {% block page_content %}
-    <form method="post" enctype='multipart/form-data'>
-        {% csrf_token %}
-        <span class="d-block p-2 bg-dark text-white" style="height:90vh">
-        <div class="p-3 bd-highlight d-grid gap-1 row justify-content-center align-items-center">
-            {% for field in form %}
-                <div class="mb-1">
-                        <label class="form-label">{{ field.label }}:</label>
+    <div class="d-flex align-items-center justify-content-center" style="height: 88vh;">
+        <form method="post" enctype='multipart/form-data' style="justify-content:center;">
+            {% csrf_token %}
+            <div class="p-5 bd-highlight d-grid gap-3 text-light row justify-content-center align-items-center">
+                {{ form|crispy }}
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="submit" class="button-7 " style="margin-top:10px; width:120px">Update</button>
                 </div>
-                {{ field }}
-                    {% if field.errors %}
-                        <div class="border-bottom-danger">
-                            {{ field.errors }}
-                        </div>
-                    {% endif %}
-            {% endfor %}
-        <div class="non-field-errors">
-    {% for err in form.non_field_errors %}
-      <p class="form-error">{{ err }}</p>
-    {% endfor %}
-        <div class="row justify-content-center align-items-center">
-            <button type="submit" class="button-7" style="margin-top:20px">Update</button>
-        </div>
-  </div>
-
-        </div>
-</span>
-    </form>
+            </div>
+        </form>
+    </div>
 {% endblock %}

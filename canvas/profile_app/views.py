@@ -102,7 +102,7 @@ class DeletePaymentView(LoginRequiredMixin, generic_views.DeleteView):
     template_name = 'profile/payment_delete.html'
 
     def get_success_url(self):
-        return reverse_lazy('manage payments', username=self.request.user.profile.username)
+        return reverse_lazy('manage payments', kwargs={'username': self.request.user.profile.username})
 
     # Create a delete and cancel button
     def post(self, request, *args, **kwargs):
@@ -146,12 +146,6 @@ class EditAddressView(LoginRequiredMixin, generic_views.UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('manage addresses', kwargs={'username': self.request.user.profile.username})
-
-    def post(self, request, *args, **kwargs):
-        if "cancel" in request.POST:
-            return redirect('manage addresses', username=self.request.user.profile.username)
-        else:
-            return super(EditAddressView, self).post(request, *args, **kwargs)
 
 
 class DeleteAddressView(LoginRequiredMixin, generic_views.DeleteView):

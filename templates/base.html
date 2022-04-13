@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
 </head>
-<body class="bg-dark">
+<body style="background-color:#1B1E21" class="text-light">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}">
@@ -31,7 +31,8 @@
                          style="border-radius:50%; position:relative">
                     {{ request.user.profile.username }}
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="background-color:#E0DFE1 ">
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"
+                    style="background-color:#E0DFE1 ">
                     <li><a class="dropdown-item" href="{% url 'profile details' request.user.profile.username %}">Profile
                         Details</a></li>
                     <li>

@@ -1,34 +1,34 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
 {% block page_content %}
-    <span class="d-block p-2 text-white">
-    <div class="text-light d-flex flex-wrap justify-content-center text-center">
-        {% if products %}
-        {% for product in products %}
-            <div class="p-3 bd-highlight">
-                    <div class="card" style="width: 19rem; border-color:black">
-                        <img src="{{ product.product_photo.url }}" class="card-img-top thumbnail-browse" alt="...">
-                        <div class="card-body" style="background-color:#262528;">
-                            <h5 class="card-title">{{ product.product_name }}</h5>
-                            <p class="card-text">{{ product.product_description|truncatesmart:30 }}</p>
-                            <p class="card-text">${{ product.product_price }}</p>
-                            <a href="{% url 'edit product' pk=product.pk %}" class="button-6">Edit</a>
-                            {% if product.product_quantity <= 0 %}
-                                <a href="{% url 'restock product' pk=product.pk %}" class="button-6">Restock</a>
-                            {% endif %}
-                            <a href="{% url 'delete product' pk=product.pk %}" class="button-6">Delete</a>
+    <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+        <div class="d-flex main-div flex-wrap justify-content-evenly text-start">
+            {% if products %}
+                {% for product in products %}
+                    <div class="p-3 bd-highlight">
+                        <div class="card" style="width: 20rem; border-color:#252422;">
+                            <img src="{{ product.product_photo.url }}" class="card-img-top thumbnail-browse" alt="...">
+                            <div class="card-body" style="background-color:#181B1E;">
+                                <h5 class="card-title">{{ product.product_name }}</h5>
+                                <p class="card-text">{{ product.product_description|truncatesmart:30 }}</p>
+                                <p class="card-text">${{ product.product_price }}</p>
+                                <a href="{% url 'edit product' pk=product.pk %}" class="button-6">Edit</a>
+                                {% if product.product_quantity <= 0 %}
+                                    <a href="{% url 'restock product' pk=product.pk %}" class="button-6">Restock</a>
+                                {% endif %}
+                                <a href="{% url 'delete product' pk=product.pk %}" class="button-6">Delete</a>
+                            </div>
                         </div>
                     </div>
+                {% endfor %}
+            {% else %}
+                <div class="card-body">
+                    <div class="mx-auto d-col gap-5" style="align-content:center; justify-content: center;">
+                        <p class="card-text">You do not currently have any items in your profile.</p>
+                        <a href="{% url 'add product' %}" class="btn btn-secondary">Add an item</a>
+                    </div>
                 </div>
-        {% endfor %}
-    {% else %}
-            <div class="card-body">
-            <div class="mx-auto d-col gap-5" style="align-content:center; justify-content: center;">
-                <p class="card-text">You do not currently have any items in your profile.</p>
-                <a href="{% url 'add product' %}" class="btn btn-secondary">Add an item</a>
-            </div>
-            </div>
-    {% endif %}
+            {% endif %}
+        </div>
     </div>
-    </span>
 {% endblock %}

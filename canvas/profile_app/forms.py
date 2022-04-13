@@ -13,6 +13,7 @@ class EditProfileForm(forms.ModelForm):
         )
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
+            'profile_photo': forms.FileInput(attrs={'class': 'form-control'})
         }
 
 
@@ -22,6 +23,9 @@ class EditBannerForm(forms.ModelForm):
         fields = (
             'shop_banner',
         )
+        widgets = {
+            'shop_banner': forms.FileInput(attrs={'class': 'form-control'}),
+        }
 
 
 class AddPaymentForm(forms.ModelForm):

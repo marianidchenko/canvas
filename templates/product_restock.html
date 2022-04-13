@@ -1,38 +1,15 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
 {% block page_content %}
-    <form method="post" enctype='multipart/form-data'>
-        {% csrf_token %}
-        <span class="d-block p-2 bg-dark text-white" style="height:90vh;">
-        <div class="card mx-auto" style="width: 18rem; border-color:black;">
-            <img src="{{ product.product_photo.url }}" class="card-img-top thumbnail-browse" alt="...">
-            <div class="card-body" style="background-color:#262528;">
-                <h5 class="card-title">{{ product.product_name }}</h5>
-                <p class="card-text">{{ product.product_description }}</p>
-                <p class="card-text">${{ product.product_price }}</p>
-                <div class="p-3 bd-highlight d-grid gap-1 bg-dark row justify-content-center align-items-center">
-                {% for field in form %}
-                    <div class="mb-1">
-                        <label class="form-label">{{ field.label }}:</label>
-                    </div>
-                    {{ field }}
-                    {% if field.errors %}
-                        <div class="border-bottom-danger">
-                            {{ field.errors }}
-                        </div>
-                    {% endif %}
-                {% endfor %}
-                <div class="non-field-errors">
-                    {% for err in form.non_field_errors %}
-                        <p class="form-error">{{ err }}</p>
-                    {% endfor %}
-                    <div class="row justify-content-center align-items-center">
-                        <button type="submit" class="btn btn-secondary" style="margin-top:20px">Restock</button>
-                    </div>
+    <div class="d-flex align-items-center justify-content-center" style="height: 88vh;">
+        <form method="post" enctype='multipart/form-data' style="justify-content:center;">
+            {% csrf_token %}
+            <div class="p-5 bd-highlight d-grid gap-3 text-light row justify-content-center align-items-center">
+                {{ form|crispy }}
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="submit" class="button-7 " style="margin-top:10px; width:120px">Restock</button>
                 </div>
             </div>
-            </div>
-
-        </div>
-        </span>
-    </form>
+        </form>
+    </div>
 {% endblock %}
