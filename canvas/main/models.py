@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.db import models
 from canvas.profile_app.models import Profile
 
@@ -27,8 +28,11 @@ class Product(models.Model):
         max_length=DESCRIPTION_MAX_LENGTH,
     )
 
-    product_photo = models.ImageField(
-        upload_to='product_photos/'
+    product_photo = CloudinaryField(
+        overwrite=True,
+        resource_type="image",
+        transformation={"quality": "auto:eco"},
+        format="jpg",
     )
 
     product_quantity = models.PositiveIntegerField()

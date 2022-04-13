@@ -296,6 +296,10 @@ class Profile(models.Model):
 
     shop_banner = CloudinaryField(
         null=True, blank=True,
+        overwrite=True,
+        resource_type="image",
+        transformation={"quality": "auto:eco"},
+        format="jpg",
     )
 
 
