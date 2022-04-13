@@ -269,7 +269,13 @@ class Profile(models.Model):
         null=False,
     )
 
-    profile_photo = CloudinaryField()
+    profile_photo = CloudinaryField(
+        "Image",
+        overwrite=True,
+        resource_type="image",
+        transformation={"quality": "auto:eco"},
+        format="jpg",
+    )
 
     user = models.OneToOneField(
         CanvasUser,
