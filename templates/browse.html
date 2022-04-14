@@ -6,7 +6,7 @@
             {% for product in products %}
                 {% if product.product_quantity > 0 %}
                     <div class="p-3 bd-highlight">
-                        <div class="card shadow" style="width: 20rem; border-color:#252422;">
+                        <div class="card shadow" style="width: 20rem; border-color:#252422; background-color: #181B1E;">
                             <img src="{{ product.product_photo.url }}" class="card-img-top thumbnail-browse" alt="...">
                             <div class="card-body" style="background-color:#181B1E;">
                                 <h5 class="card-title">{{ product.product_name }}</h5>
