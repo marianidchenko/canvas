@@ -153,3 +153,7 @@ label {
     background-color: #212529;
     padding: 5px;
 }
+
+#hint_id_password1{
+    display: none;
+}
