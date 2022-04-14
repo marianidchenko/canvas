@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
-
 from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress, ProductEditForm, ProductRestockForm, \
     ProductDeleteForm
 from canvas.main.helpers import get_available_payment_methods, get_available_addresses, get_cart_items, get_total_price

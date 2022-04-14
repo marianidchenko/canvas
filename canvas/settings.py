@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'canvas.profile_app',
 
     'cloudinary',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
