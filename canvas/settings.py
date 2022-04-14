@@ -3,6 +3,8 @@ from pathlib import Path
 
 import cloudinary
 
+from canvas import middlewares
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT')
@@ -40,6 +42,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'canvas.middlewares.handle_exception'
 ]
 
 ROOT_URLCONF = 'canvas.urls'
