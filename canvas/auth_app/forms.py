@@ -1,6 +1,8 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
+
+from canvas.common_tools.validators import validate_unique_username, validate_photo
 from canvas.profile_app.models import Profile
 
 UserModel = get_user_model()
@@ -13,9 +15,8 @@ class UserRegistrationForm(auth_forms.UserCreationForm):
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
-        username_qs = Profile.objects.filter(username=username)
-        if username_qs.exists():
-            raise forms.forms.ValidationError(f"Username {username} is already taken.")
+        validate_unique_username(username)
+        return self.cleaned_data['username']
 
     profile_photo = CloudinaryFileField()
 

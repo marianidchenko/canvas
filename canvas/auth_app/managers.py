@@ -9,7 +9,7 @@ class AppUsersManager(base_user.BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.password = make_password(password)
-        user.save(using=self._db)
+        user.save()
         return user
 
     def create_user(self, email, password=None, **extra_fields):

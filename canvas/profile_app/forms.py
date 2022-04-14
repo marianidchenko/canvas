@@ -1,8 +1,21 @@
 from django import forms
+
+from canvas.common_tools.validators import validate_photo, validate_unique_username
 from canvas.profile_app.models import PaymentMethod, Address, Profile
 
 
 class EditProfileForm(forms.ModelForm):
+
+    def clean_username(self):
+        if 'username' in self.changed_data:
+            validate_unique_username(self.cleaned_data['username'])
+        return self.cleaned_data['username']
+
+    def clean_profile_photo(self):
+        if 'profile_photo' in self.changed_data:
+            validate_photo(self.cleaned_data['profile_photo'])
+        return self.cleaned_data['profile_photo']
+
     class Meta:
         model = Profile
         fields = (
