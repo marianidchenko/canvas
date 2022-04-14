@@ -31,6 +31,21 @@ class AllProductsView(generic_views.ListView):
     paginate_by = 8
 
 
+class SearchProductsView(generic_views.ListView):
+    model = Product
+    template_name = 'browse.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        if query:
+            result = Product.objects.filter(product_name__icontains=query).exclude(product_quantity=0)
+        else:
+            result = Product.objects.all()
+        return result
+    paginate_by = 8
+
+
 class ProfileProductViews(generic_views.ListView):
     model = Product
     template_name = 'browse.html'

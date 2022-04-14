@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load custom_tags %}
 {% block page_content %}
-    <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
-        <div class="d-flex main-div flex-wrap justify-content-evenly text-start">
+     <div class="d-flex flex-column mb-3 justify-content-center">
+        <div class="p-2 bd-highlight main-div d-flex flex-wrap justify-content-start text-start" style="margin-left:6vw; margin-right:3vw">
             {% if products %}
                 {% for product in products %}
                     <div class="p-3 bd-highlight">
-                        <div class="card" style="width: 20rem; border-color:#252422;">
+                        <div class="card" style="width: 20rem; border-color:#252422; background-color:#181B1E;">
                             <img src="{{ product.product_photo.url }}" class="card-img-top thumbnail-browse" alt="...">
                             <div class="card-body" style="background-color:#181B1E;">
                                 <h5 class="card-title">{{ product.product_name }}</h5>

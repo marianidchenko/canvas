@@ -16,6 +16,15 @@
             <img src="{% static 'images/logo.png' %}" alt="" width="160" height="60">
         </a>
     </div>
+    <form action="{% url 'search' %}" class="d-flex" style="margin-right:15px">
+        <div class="col">
+            <input class="form-control me-2" type="search" placeholder="Look for an item" aria-label="Search"
+                   name="search" style="background-color:#E0DFE1; width: 200px">
+        </div>
+         <div class="col">
+            <button type='submit' class="btn btn-outline-secondary">Go</button>
+         </div>
+    </form>
     <ul class="navbar-nav" style="font-size:18px">
         <li class="nav-item">
             <a class="nav-link" href="{% url 'browse' %}">Browse</a>
