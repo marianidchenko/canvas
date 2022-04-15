@@ -1,13 +1,15 @@
 import os
 from pathlib import Path
+
 import cloudinary
+
 from canvas import middlewares
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT')
 
-SECRET_KEY = os.getenv('SECRET_KEY', '123abc')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
@@ -64,6 +66,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'canvas.wsgi.application'
 
+# Database
+# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
 DATABASES = None
 
 AUTH_PASSWORD_VALIDATORS = []
@@ -107,7 +112,7 @@ else:
             'HOST': os.getenv("DB_HOST", "127.0.0.1"),
             'PORT': '5432',
             'TEST': {
-                'NAME': 'canvas_test_database',
+                'NAME': 'canvas_testing_db',
             }
         },
     }
