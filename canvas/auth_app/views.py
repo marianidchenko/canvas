@@ -13,7 +13,6 @@ class UserRegistrationView(generic_views.CreateView):
     template_name = 'auth/register.html'
     success_url = reverse_lazy('index')
 
-    # To log in directly after registration
     def form_valid(self, form):
         result = super().form_valid(form)
         login(self.request, self.object)

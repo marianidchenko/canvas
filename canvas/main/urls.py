@@ -1,6 +1,11 @@
 from django.urls import path
 
-from canvas.main.views import *
+from canvas.main.main_views.browsing import IndexView, AllProductsView, SearchProductsView, ProfileProductViews, \
+    ProductDetailView
+from canvas.main.main_views.cart_and_checkout import add_to_cart_view, CartView, RemoveCartItemView, CheckoutView, \
+    PurchasedView
+from canvas.main.main_views.product_CRUD import CreateProductView, ManageProductsView, EditProductView, \
+    RestockProductView, DeleteProductView
 
 urlpatterns = (
     path('', IndexView.as_view(), name='index'),
