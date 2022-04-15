@@ -30,6 +30,9 @@
             <a class="nav-link" href="{% url 'browse' %}">Browse</a>
         </li>
         {% if user.is_authenticated %}
+            <li class="nav-item" style="width:117px">
+                <a class="nav-link" href="{% url 'add product' %}">Add product</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'cart' %}">Cart</a>
             </li>
@@ -47,7 +50,8 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="{% url 'add product' %}">Add Product</a></li>
+                    <li><a class="dropdown-item" href="{% url 'manage payments' username=request.user.profile.username%}">Manage Payments</a></li>
+                    <li><a class="dropdown-item" href="{% url 'manage addresses' username=request.user.profile.username%}">Manage Addresses</a></li>
                     <li><a class="dropdown-item" href="{% url 'manage products' %}">Manage Products</a></li>
                     <li>
                         <hr class="dropdown-divider">
