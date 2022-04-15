@@ -154,7 +154,6 @@ class DeleteAddressView(LoginRequiredMixin, generic_views.DeleteView):
     def get_success_url(self):
         return reverse_lazy('manage addresses', kwargs={'username': self.request.user.profile.username})
 
-    # Create a delete and cancel button
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
             return redirect('manage addresses', username=self.request.user.profile.username)
