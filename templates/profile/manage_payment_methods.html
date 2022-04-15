@@ -7,7 +7,7 @@
             <div class="d-flex flex-wrap justify-content-center text-light">
                 {% for payment_method in payment_methods %}
                     <div class="p-3 bd-highlight">
-                        <div class="card" style="width: 18rem; border-color:#252422;">
+                        <div class="card" style="width: 18rem; border-color:#252422; background-color:#181B1E">
                             <img src="{% static 'images/preview.png' %}" class="card-img-top" alt="...">
                             <div class="card-body" style="background-color:#181B1E;">
                                 <h5 class="card-title">{{ payment_method.card_number|slice:4 }} **** **** ****</h5>
