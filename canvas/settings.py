@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
-
 import cloudinary
-
 from canvas import middlewares
 
 BASE_DIR = Path(__file__).resolve().parent.parent
