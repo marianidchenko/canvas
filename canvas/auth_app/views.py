@@ -2,9 +2,6 @@ from django.contrib.auth import get_user_model, login
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 from django.contrib.auth import views as auth_views
-
-
-# Create your views here.
 from canvas.auth_app.forms import UserRegistrationForm
 
 
@@ -19,8 +16,6 @@ class UserRegistrationView(generic_views.CreateView):
     # To log in directly after registration
     def form_valid(self, form):
         result = super().form_valid(form)
-        # user => self.object
-        # request => self.request
         login(self.request, self.object)
         return result
 
@@ -33,7 +28,6 @@ class UserLoginView(auth_views.LoginView):
 
 
 class UserLogoutView(auth_views.LogoutView):
-    # Overriding next page to add a popup
     pass
 
 

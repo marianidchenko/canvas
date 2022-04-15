@@ -1,8 +1,7 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
-
-from canvas.common_tools.validators import validate_unique_username, validate_photo
+from canvas.common_tools.validators import validate_unique_username
 from canvas.profile_app.models import Profile
 
 UserModel = get_user_model()

@@ -1,14 +1,12 @@
-from creditcards import types
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
 
 from canvas.main.models import Product
-from canvas.profile_app.forms import AddPaymentForm, EditPaymentForm, DeletePaymentForm, AddAddressForm, \
-    EditAddressForm, DeleteAddressForm, EditProfileForm, EditBannerForm
-from canvas.profile_app.helpers import get_profile_by_username, get_products_by_profile_username
-from canvas.profile_app.models import PaymentMethod, Address, Profile
+from canvas.profile_app.forms import *
+from canvas.common_tools.helpers import get_profile_by_username
+from canvas.profile_app.models import *
 
 
 class ProfileDetailsView(generic_views.ListView):

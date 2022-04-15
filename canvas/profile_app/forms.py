@@ -1,5 +1,4 @@
 from django import forms
-
 from canvas.common_tools.validators import validate_photo, validate_unique_username
 from canvas.profile_app.models import PaymentMethod, Address, Profile
 

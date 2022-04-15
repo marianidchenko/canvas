@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from canvas.auth_app.models import CanvasUser
-from canvas.profile_app.helpers import get_profile_by_username
+from canvas.common_tools.helpers import get_profile_by_username
 from canvas.profile_app.models import Profile
 
 

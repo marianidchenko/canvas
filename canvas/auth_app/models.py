@@ -1,8 +1,5 @@
 from django.contrib.auth import models as auth_models
 from django.db import models
-
-
-# Create your models here.
 from canvas.auth_app.managers import AppUsersManager
 
 

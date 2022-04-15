@@ -1,6 +1,5 @@
 import cloudinary
 from django.forms import forms
-
 from canvas.profile_app.models import Profile
 
 
@@ -20,7 +19,6 @@ def validate_photo(img):
     if type(img) == cloudinary.CloudinaryResource:
         pass
     elif type(img) == cloudinary.CloudinaryImage:
-        a =5
         extension = img.format
         if extension not in available_formats:
             raise forms.ValidationError(

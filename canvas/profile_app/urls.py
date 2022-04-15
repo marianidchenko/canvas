@@ -1,7 +1,6 @@
 from django.urls import path
-from canvas.profile_app.views import AddPaymentMethodView, ProfileDetailsView, EditPaymentView, \
-    ManagePaymentMethodsView, DeletePaymentView, AddAddressView, ManageAddressesView, EditAddressView, \
-    DeleteAddressView, EditProfileView, EditBannerView
+
+from canvas.profile_app.views import *
 
 urlpatterns = (
     path('<str:username>/', ProfileDetailsView.as_view(), name='profile details'),
@@ -13,9 +12,8 @@ urlpatterns = (
     path('payment/edit/<int:pk>/', EditPaymentView.as_view(), name='edit payment'),
     path('payment/delete/<int:pk>/', DeletePaymentView.as_view(), name='delete payment'),
 
-    path('address/add/', AddAddressView.as_view(), name='add address'),
     path('manage_addresses/<str:username>/', ManageAddressesView.as_view(), name='manage addresses'),
+    path('address/add/', AddAddressView.as_view(), name='add address'),
     path('address/edit/<int:pk>/', EditAddressView.as_view(), name='edit address'),
     path('address/delete/<int:pk>/', DeleteAddressView.as_view(), name='delete address'),
-
 )

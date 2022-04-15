@@ -2,11 +2,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as generic_views
-from canvas.main.forms import CreateProductFrom, ChooseCardAndAddress, ProductEditForm, ProductRestockForm, \
-    ProductDeleteForm
-from canvas.main.helpers import get_available_payment_methods, get_available_addresses, get_cart_items, get_total_price
+
+from canvas.main.forms import *
+from canvas.common_tools.helpers import *
 from canvas.main.models import Product, CartItem
-from canvas.profile_app.helpers import get_profile_by_username
 
 
 class IndexView(generic_views.TemplateView):
@@ -73,6 +72,60 @@ class CreateProductView(LoginRequiredMixin, generic_views.CreateView):
         return super(CreateProductView, self).form_valid(form)
 
 
+class ManageProductsView(LoginRequiredMixin, generic_views.ListView):
+    model = Product
+    template_name = 'product_manage.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        return self.model.objects.filter(profile=self.request.user.profile).order_by('product_quantity')
+
+
+class EditProductView(LoginRequiredMixin, generic_views.UpdateView):
+    model = Product
+    template_name = 'product_edit.html'
+    form_class = ProductEditForm
+    success_url = reverse_lazy('manage products')
+
+
+class RestockProductView(LoginRequiredMixin, generic_views.UpdateView):
+    model = Product
+    template_name = 'product_restock.html'
+    form_class = ProductRestockForm
+    success_url = reverse_lazy('manage products')
+
+
+class DeleteProductView(generic_views.DeleteView):
+    model = Product
+    template_name = 'product_delete.html'
+    form_class = ProductDeleteForm
+    success_url = reverse_lazy('manage products')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect('manage products')
+        else:
+            return super(DeleteProductView, self).post(request, *args, **kwargs)
+
+
+def add_to_cart_view(request, pk):
+    product = Product.objects.get(pk=pk)
+    current_profile = request.user.profile
+    product.product_quantity -= 1
+    product.save()
+    cartitem = CartItem.objects.filter(profile=current_profile, product=product)
+    if not cartitem:
+        cartitem = CartItem.objects.create(
+            product=product,
+            profile=current_profile
+        )
+    else:
+        cartitem = cartitem[0]
+    cartitem.quantity += 1
+    cartitem.save()
+    return redirect('browse')
+
+
 class CartView(LoginRequiredMixin, generic_views.ListView):
     model = CartItem
     template_name = 'cart.html'
@@ -136,57 +189,3 @@ class CheckoutView(LoginRequiredMixin, generic_views.FormView):
 
 class PurchasedView(LoginRequiredMixin, generic_views.TemplateView):
     template_name = 'purchased.html'
-
-
-def add_to_cart_view(request, pk):
-    product = Product.objects.get(pk=pk)
-    current_profile = request.user.profile
-    product.product_quantity -= 1
-    product.save()
-    cartitem = CartItem.objects.filter(profile=current_profile, product=product)
-    if not cartitem:
-        cartitem = CartItem.objects.create(
-            product=product,
-            profile=current_profile
-        )
-    else:
-        cartitem = cartitem[0]
-    cartitem.quantity += 1
-    cartitem.save()
-    return redirect('browse')
-
-
-class ManageProductsView(LoginRequiredMixin, generic_views.ListView):
-    model = Product
-    template_name = 'product_manage.html'
-    context_object_name = 'products'
-
-    def get_queryset(self):
-        return self.model.objects.filter(profile=self.request.user.profile).order_by('product_quantity')
-
-
-class EditProductView(LoginRequiredMixin, generic_views.UpdateView):
-    model = Product
-    template_name = 'product_edit.html'
-    form_class = ProductEditForm
-    success_url = reverse_lazy('manage products')
-
-
-class RestockProductView(LoginRequiredMixin, generic_views.UpdateView):
-    model = Product
-    template_name = 'product_restock.html'
-    form_class = ProductRestockForm
-    success_url = reverse_lazy('manage products')
-
-
-class DeleteProductView(generic_views.DeleteView):
-    model = Product
-    template_name = 'product_delete.html'
-    form_class = ProductDeleteForm
-    success_url = reverse_lazy('manage products')
-
-    def post(self, request, *args, **kwargs):
-        if "cancel" in request.POST:
-            return redirect('manage products')
-        else:
-            return super(DeleteProductView, self).post(request, *args, **kwargs)
