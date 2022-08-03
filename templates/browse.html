@@ -2,7 +2,7 @@
 {% block page_content %}
     {% load custom_tags %}
     <div class="d-flex flex-column mb-3 justify-content-center">
-        <div class="p-2 bd-highlight main-div d-flex flex-wrap justify-content-start text-start" style="margin-left:6vw; margin-right:3vw">
+        <div class="p-2 bd-highlight main-div d-flex flex-wrap text-start" style="display: flex; justify-content: space-evenly;">
             {% for product in products %}
                 {% if product.product_quantity > 0 %}
                     <div class="p-3 bd-highlight">
